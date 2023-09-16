@@ -4,6 +4,7 @@ import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import NavTab from '../NavTab/NavTab';
+import SearchForm from '../SearchForm/SearchForm';
 
 function Page() {
     return (
@@ -13,6 +14,7 @@ function Page() {
             <AboutProject></AboutProject>
             <Techs></Techs>
             <AboutMe></AboutMe>
+            <SearchForm></SearchForm>
         </>
     );
 }
