@@ -1,0 +1,13 @@
+.aboutme__link-arrow {
+  background-image: url('../../images/arrow.svg');
+  width: 29px;
+  height: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.aboutme__link-arrow:hover {
+  cursor: pointer;
+}

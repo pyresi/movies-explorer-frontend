@@ -1,0 +1,14 @@
+.aboutme__link-container {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-bottom: solid 1px #e8e8e8;
+  padding-bottom: 19px;
+}
+
+.aboutme__link-container:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
