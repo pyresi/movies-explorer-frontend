@@ -4,8 +4,8 @@
   min-width: 320px;
   margin: 0 auto;
   color: #ffffff;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #000000;
+  justify-content: center; */
+  background-color: plum;
 }

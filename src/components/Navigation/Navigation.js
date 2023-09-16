@@ -3,10 +3,12 @@ import './Navigation__paragrath.css';
 
 function Navigation() {
     return (
-        <div className='navigation'>
-            <a className='navigation__paragrath'>Фильмы</a>
-            <a className='navigation__paragrath'>Сохранёные фильмы</a>
-        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="#">Фильмы</a></li>
+                <li><a href="#">Сохранёные фильмы</a></li>
+            </ul>
+        </nav>
     );
 }
 
