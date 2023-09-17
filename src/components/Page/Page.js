@@ -5,6 +5,10 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import NavTab from '../NavTab/NavTab';
 import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Movies from '../Movies/Movies';
+import Profile from '../Profile/Profile';
 
 function Page() {
     return (
@@ -15,6 +19,9 @@ function Page() {
             <Techs></Techs>
             <AboutMe></AboutMe>
             <SearchForm></SearchForm>
+            <Movies></Movies>
+            <SavedMovies></SavedMovies>
+            <Profile></Profile>
         </>
     );
 }

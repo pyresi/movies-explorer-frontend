@@ -1,0 +1,8 @@
+.searchform__short-movies-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-top: 42px;
+  padding-bottom: 70px;
+  gap: 12px;
+}

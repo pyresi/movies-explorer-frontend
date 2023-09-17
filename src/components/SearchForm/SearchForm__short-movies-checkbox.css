@@ -1,0 +1,51 @@
+.searchform__short-movies-checkbox {
+  width: 36px;
+  height: 20px;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  appearance: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.searchform__short-movies-checkbox::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.searchform__short-movies-checkbox:checked {
+  width: 36px;
+  height: 20px;
+  background-color: #2be080;
+  border-radius: 10px;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+}
+
+.searchform__short-movies-checkbox:checked::before {
+  /* content: ''; */
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+/* .searchform__short-movies-checkbox_checked {
+} */

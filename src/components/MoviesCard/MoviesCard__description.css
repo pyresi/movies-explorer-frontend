@@ -1,0 +1,8 @@
+.moviescard__description {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  position: relative;
+  padding: 0;
+}

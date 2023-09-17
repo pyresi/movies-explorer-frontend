@@ -1,7 +1,10 @@
 .searchform__bar {
   background-color: #f9f9f9;
   border-radius: 40px;
-  width: 1140px;
+  width: 1128px;
   margin-top: 60px;
-  margin-left: 70px;
+  /* margin-left: 70px; */
+  height: 46px;
+  padding-left: 10px;
+  border: none;
 }

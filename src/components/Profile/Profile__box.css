@@ -1,0 +1,12 @@
+.profile__box {
+  display: flex;
+  justify-content: space-between;
+  width: 410px;
+  border-bottom: 1px solid #e8e8e8;
+  margin-top: 5px;
+  padding-bottom: 5px;
+}
+
+.profile__box:last-of-type {
+  border-bottom: none;
+}
