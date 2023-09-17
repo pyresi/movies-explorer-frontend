@@ -1,0 +1,6 @@
+.register__login-box {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  margin-bottom: 70px;
+}

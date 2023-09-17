@@ -9,6 +9,9 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 function Page() {
     return (
@@ -22,6 +25,9 @@ function Page() {
             <Movies></Movies>
             <SavedMovies></SavedMovies>
             <Profile></Profile>
+            <Register></Register>
+            <Login></Login>
+            <ErrorPage></ErrorPage>
         </>
     );
 }

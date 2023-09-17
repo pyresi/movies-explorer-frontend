@@ -1,0 +1,12 @@
+.register__box-input {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  height: 46px;
+  width: 396px;
+  padding-left: 10px;
+  border: none;
+  color: black;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
