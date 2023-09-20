@@ -11,3 +11,10 @@
 .aboutme__link-arrow:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 320px) {
+  .aboutme__link-arrow {
+    width: 18px;
+    height: 28px;
+  }
+}

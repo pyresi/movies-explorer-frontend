@@ -7,3 +7,12 @@
   border-radius: 10px;
   font-size: 14px;
 }
+
+.techs__list-element:last-of-type {
+}
+
+@media screen and (max-width: 320px) {
+  .techs__list-element {
+    font-size: 12px;
+  }
+}

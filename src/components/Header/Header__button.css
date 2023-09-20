@@ -1,8 +1,14 @@
 .header__button {
-  margin: 21px 70px 21px 0;
   border-radius: 20px;
   background-color: #f9f9f9;
   border: none;
   width: 100px;
+  /* height: 32px; */
   font-size: 14px;
+  color: black;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }

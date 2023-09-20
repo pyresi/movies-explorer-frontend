@@ -6,3 +6,9 @@
   text-decoration: none;
   color: black;
 }
+
+@media screen and (max-width: 320px) {
+  .aboutme__github {
+    margin: 40px auto 70px auto;
+  }
+}

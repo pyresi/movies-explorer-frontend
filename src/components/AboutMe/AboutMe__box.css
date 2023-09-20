@@ -1,5 +1,20 @@
 .aboutme__box {
-  /* max-width: 600px; */
   position: relative;
-  /* min-height: ; */
+}
+
+@media screen and (max-width: 768px) {
+  .aboutme {
+    /* position: inherit; */
+    width: 668px;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutme__box {
+    width: 292px;
+    padding: 0;
+  }
 }

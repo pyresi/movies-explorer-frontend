@@ -3,3 +3,12 @@
   font-weight: 400;
   text-align: center;
 }
+
+@media screen and (max-width: 320px) {
+  .promo__paragraph {
+    font-size: 31px;
+    width: 300px;
+    margin: 0;
+    padding: 0;
+  }
+}

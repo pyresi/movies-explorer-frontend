@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 function Login() {
     return (
@@ -17,7 +18,7 @@ function Login() {
                 <button type='button' className='register__button'>Войти</button>
                 <div className='register__login-box'>
                     <p className='register__paragraph'>Еще не зарегестрированы?</p>
-                    <a className='register__link'>Регистрация</a>
+                    <Link className='register__link' to='/sign-up'>Регистрация</Link>
                 </div>
             </form>
         </div>

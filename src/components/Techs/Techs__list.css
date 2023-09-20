@@ -4,3 +4,13 @@
   justify-content: center;
   gap: 10px;
 }
+
+@media screen and (max-width: 320px) {
+  .techs__list {
+    flex-wrap: wrap;
+    max-width: 200px;
+    justify-content: start;
+    /* margin: auto; */
+    /* flex-basis: 100%; */
+  }
+}

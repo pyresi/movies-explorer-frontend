@@ -20,9 +20,8 @@ function AboutMe() {
             <div className='aboutme__box'>
                 <h2 className='aboutme__name'>Анастасия</h2>
                 <p className='aboutme__bio'>Фронтенд-разработчик, 25 лет</p>
-                <p className='aboutme__description'>Закончила РУДН по специальности лингвистика, работала переводчиком пока не прошла курс по веб-разработке. Сейчас живу в Москве. В свободное время занимаюсь волонтерством и спортом.
-                </p>
                 <img src={portrait} alt="Портретная фотография студента" className='aboutme__portrait'></img>
+                <p className='aboutme__description'>Закончила РУДН по специальности лингвистика, работала переводчиком пока не прошла курс по веб-разработке. Сейчас живу в Москве. В свободное время занимаюсь волонтерством и спортом.</p>
                 <a className='aboutme__github' href='#'>GitHub</a>
                 <a className='aboutme__portfolio' href='#'>Портфолио</a>
                 <ul className='aboutme__links'>

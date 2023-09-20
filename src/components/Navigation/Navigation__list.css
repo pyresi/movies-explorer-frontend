@@ -1,0 +1,12 @@
+.navigation__list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin: 18px 364px 18px 0;
+  width: 211px;
+  width: 211px;
+  color: white;
+  text-decoration: none;
+  list-style: none;
+}

@@ -10,6 +10,7 @@ import './Register__button.css';
 import './Register__link.css';
 import './Register__paragraph.css';
 import './Register__login-box.css';
+import { Link } from 'react-router-dom';
 
 function Register() {
     return (
@@ -34,7 +35,7 @@ function Register() {
                 <button type='button' className='register__button'>Зарегистрироваться</button>
                 <div className='register__login-box'>
                     <p className='register__paragraph'>Уже зарегестрированы?</p>
-                    <a className='register__link'>Войти</a>
+                    <Link className='register__link' to='/sign-in'>Войти</Link>
                 </div>
             </form>
         </div>

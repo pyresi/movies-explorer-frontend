@@ -3,3 +3,9 @@
   font-weight: 500;
   margin: 18px auto 26px auto;
 }
+
+@media screen and (max-width: 320px) {
+  .aboutme__bio {
+    font-size: 11px;
+  }
+}

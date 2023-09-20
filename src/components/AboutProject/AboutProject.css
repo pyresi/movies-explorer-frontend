@@ -4,3 +4,16 @@
   padding: 110px 70px;
   max-width: 1280px;
 }
+
+@media screen and (max-width: 767px) {
+  .aboutproject {
+    max-width: 767px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutproject {
+    max-width: 320px;
+    padding: 70px 18px;
+  }
+}

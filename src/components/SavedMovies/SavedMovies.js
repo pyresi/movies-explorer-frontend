@@ -1,10 +1,13 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import '../Movies/Movies.css';
 import '../Movies/Movies__more-btn.css';
+import Movies from "../Movies/Movies";
+import SearchForm from "../SearchForm/SearchForm";
 
 function SavedMovies() {
     return (
         <div className="movies">
+            <SearchForm></SearchForm>
             <MoviesCardList></MoviesCardList>
             <button className='movies__more-btn'>
                 Ещё

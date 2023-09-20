@@ -1,4 +1,16 @@
 .aboutme__description {
   font-size: 14px;
-  max-width: 600px;
+  max-width: min(600px, 50%);
+}
+
+@media screen and (max-width: 768px) {
+  .aboutme__description {
+    max-width: 292px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutme__description {
+    font-size: 11px;
+  }
 }

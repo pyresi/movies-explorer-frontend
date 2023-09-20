@@ -3,3 +3,9 @@
   grid-template-columns: 1fr 4fr;
   max-width: 1140px;
 }
+
+@media screen and (max-width: 320px) {
+  .aboutproject__timeline {
+    font-size: 11px;
+  }
+}

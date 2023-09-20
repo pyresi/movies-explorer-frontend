@@ -4,3 +4,11 @@
   min-width: 600px;
   /* margin: 110px 610px 23px 70px; */
 }
+
+@media screen and (max-width: 320px) {
+  .aboutproject__header {
+    min-width: 284px;
+    margin: 0;
+    font-size: 18px;
+  }
+}

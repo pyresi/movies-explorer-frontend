@@ -6,3 +6,11 @@
   margin: 26px auto 100px auto;
   padding: 0;
 }
+
+@media screen and (max-width: 320px) {
+  .techs__paragraph {
+    min-width: 284px;
+    margin: 24px auto 50px auto;
+    font-size: 11px;
+  }
+}

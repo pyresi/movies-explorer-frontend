@@ -4,3 +4,11 @@
   color: black;
   line-height: 50px;
 }
+
+@media screen and (max-width: 320px) {
+  .aboutme__link {
+    width: 250px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

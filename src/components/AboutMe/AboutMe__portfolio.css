@@ -5,3 +5,11 @@
   display: block;
   text-decoration: none;
 }
+
+@media screen and (max-width: 320px) {
+  .aboutme__portfolio {
+    width: 292px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+}

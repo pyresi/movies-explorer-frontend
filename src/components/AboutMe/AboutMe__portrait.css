@@ -1,7 +1,14 @@
 .aboutme__portrait {
-  width: 270px;
+  max-width: 270px;
   border-radius: 10px;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .aboutme__portrait {
+    position: inherit;
+    width: 292px;
+  }
 }
