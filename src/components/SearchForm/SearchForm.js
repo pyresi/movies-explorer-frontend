@@ -4,7 +4,7 @@ import './SearchForm__bar.css';
 import './SearchForm__searchbar-section.css';
 import './SearchForm__short-movies-section.css';
 import './SearchForm__short-movies-checkbox.css';
-import './SearchForm__short-movies-checkbox_description.css';
+import './SearchForm__short-movies-checkbox-description.css';
 
 function SearchForm() {
     return (
@@ -16,7 +16,7 @@ function SearchForm() {
 
             <div className='searchform__short-movies-section'>
                 <input type='checkbox' id='short-movies-checkbox' className='searchform__short-movies-checkbox'></input>
-                <p className='searchform__short-movies-checkbox_description'>Короткометражки</p>
+                <p className='searchform__short-movies-checkbox-description'>Короткометражки</p>
             </div>
         </form>
     )

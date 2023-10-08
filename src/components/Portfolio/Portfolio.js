@@ -11,16 +11,13 @@ function Portfolio() {
         <SectionHeader headerText={'Портфолио'} isSubHeader={true} />
         <ul className='portfolio__links'>
             <li className='portfolio__link-container'>
-                <Link className='portfolio__link' to='https://github.com/pyresi/how-to-learn' target="_blank">Статичный сайт</Link>
-                <Link className='portfolio__link-arrow' to='https://github.com/pyresi/how-to-learn' target="_blank"></Link>
+                <Link className='portfolio__link' to='https://github.com/pyresi/how-to-learn' target="_blank">Статичный сайт <span className="portfolio__link-arrow"></span></Link>
             </li>
             <li className='portfolio__link-container'>
-                <Link className='portfolio__link' to='https://github.com/pyresi/russian-travel' target="_blank">Адаптивный сайт</Link>
-                <Link className='portfolio__link-arrow' to='https://github.com/pyresi/russian-travel' target="_blank"></Link>
+                <Link className='portfolio__link' to='https://github.com/pyresi/russian-travel' target="_blank">Адаптивный сайт <span className="portfolio__link-arrow"></span></Link>
             </li>
             <li className='portfolio__link-container'>
-                <Link className='portfolio__link' to='https://github.com/pyresi/react-mesto-api-full-gha' target="_blank">Одностраничное приложение</Link>
-                <Link className='portfolio__link-arrow' to='https://github.com/pyresi/react-mesto-api-full-gha' target="_blank"></Link>
+                <Link className='portfolio__link' to='https://github.com/pyresi/react-mesto-api-full-gha' target="_blank">Одностраничное приложение <span className="portfolio__link-arrow"></span></Link>
             </li>
         </ul>
     </section>);

@@ -3,6 +3,10 @@
   text-decoration: none;
   color: black;
   line-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .portfolio__link:hover {
