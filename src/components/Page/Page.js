@@ -4,21 +4,20 @@ import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import NavTab from '../NavTab/NavTab';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Portfolio from '../Portfolio/Portfolio';
 
 
 
 function Page() {
     return (
-        <>
+        <main className='page'>
             <Promo />
             <NavTab />
             <AboutProject />
             <Techs />
             <AboutMe />
             <Portfolio />
-        </>
+        </main>
     );
 }
 

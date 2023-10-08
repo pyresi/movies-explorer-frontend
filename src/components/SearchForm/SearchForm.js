@@ -10,7 +10,7 @@ function SearchForm() {
     return (
         <form id='searchform' className='searchform'>
             <div className='searchform__searchbar-section'>
-                <input id='search-bar' className='searchform__bar' placeholder='Фильм'></input>
+                <input id='search-bar' className='searchform__bar' placeholder='Фильм' required></input>
                 <button type='button' className='searchform__button'></button>
             </div>
 

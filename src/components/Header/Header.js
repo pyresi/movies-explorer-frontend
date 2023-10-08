@@ -16,11 +16,11 @@ function Header() {
     }
 
     return (
-        <div className={headerClass}>
+        <header className={headerClass}>
             <div className='header__container'>
                 <Navigation />
             </div>
-        </div>
+        </header>
     );
 }
 
