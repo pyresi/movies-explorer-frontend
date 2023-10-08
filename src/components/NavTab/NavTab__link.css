@@ -4,8 +4,10 @@
   font-weight: 500;
   line-height: 16px;
   text-underline-offset: 2.5px;
-  /* text-decoration: none; */
   color: black;
+}
+.navtab__link:hover {
+  opacity: 70%;
 }
 
 @media screen and (max-width: 320px) {

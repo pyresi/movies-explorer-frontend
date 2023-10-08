@@ -1,5 +1,18 @@
 .register__header {
-  width: 396px;
+  width: 100%;
   font-weight: 500;
   font-size: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .register__header {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .register__header {
+    margin-bottom: 80px;
+    text-align: center;
+  }
 }

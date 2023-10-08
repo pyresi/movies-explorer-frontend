@@ -1,11 +1,21 @@
 .aboutproject__timeline {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  max-width: 1140px;
+  width: 100%;
+  margin-bottom: 110px;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutproject__timeline {
+    font-size: 11px;
+    grid-template-columns: 140fr 528fr;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .aboutproject__timeline {
     font-size: 11px;
+    grid-template-columns: 100fr 184fr;
+    margin-bottom: 70px;
   }
 }

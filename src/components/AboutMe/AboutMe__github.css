@@ -1,14 +1,12 @@
 .aboutme__github {
   font-size: 14px;
   font-weight: 500;
-  margin: 99px auto 91px auto;
   display: block;
   text-decoration: none;
   color: black;
+  margin-top: auto;
 }
 
-@media screen and (max-width: 320px) {
-  .aboutme__github {
-    margin: 40px auto 70px auto;
-  }
+.aboutme__github:hover {
+  opacity: 70%;
 }

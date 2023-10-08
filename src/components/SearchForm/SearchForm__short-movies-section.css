@@ -6,3 +6,9 @@
   padding-bottom: 70px;
   gap: 12px;
 }
+
+@media screen and (max-width: 320px) {
+  .searchform__short-movies-section {
+    padding-bottom: 50px;
+  }
+}

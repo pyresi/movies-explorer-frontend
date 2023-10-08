@@ -9,45 +9,55 @@ import Profile from '../Profile/Profile';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import { useEffect, useState } from 'react';
+import { AppContext } from '../../contexts/CurrentAppContext';
+import SideMenu from '../SideMenu/SideMenu';
+import { UserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
 
+  const [isSideMenuActive, setIsSideMenuActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+
+  function handleCloseSideMenuButtonClick() {
+    setIsSideMenuActive(false);
+  }
+
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        handleCloseSideMenuButtonClick();
+      }
+    }
+    if (isSideMenuActive) {
+      // навешиваем только при открытии
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      };
+    }
+  }, [isSideMenuActive]);
+
   return (
     <div className="page">
-      <Header></Header>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Page />
-          }
-        />
-        <Route
-          path="/sign-up"
-          element={<Register />}
-        />
-        <Route
-          path="/sign-in"
-          element={<Login />}
-        />
-        <Route
-          path="/profile"
-          element={<Profile />}
-        />
-        <Route
-          path="/error"
-          element={<ErrorPage />}
-        />
-        <Route
-          path="/movies"
-          element={<Movies />}
-        />
-        <Route
-          path="/saved-movies"
-          element={<SavedMovies />}
-        />
-      </Routes>
-      {/* <Footer></Footer> */}
+      <AppContext.Provider value={{ isLoading, setIsLoading, isSideMenuActive, setIsSideMenuActive }}>
+        <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+          <Header></Header>
+          <Routes>
+            <Route path="/" element={<Page />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/saved-movies" element={<SavedMovies />} />
+            <Route path="*" element={<ErrorPage />} status={404} />
+          </Routes>
+          <Footer></Footer>
+          <SideMenu />
+        </UserContext.Provider>
+      </AppContext.Provider>
     </div>
   );
 }

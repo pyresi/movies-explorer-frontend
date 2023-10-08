@@ -1,6 +1,7 @@
 .techs__list-element {
   background-color: #e8e8e8;
   width: 90px;
+  min-width: 84px;
   padding-top: 21px;
   padding-bottom: 21px;
   text-align: center;
@@ -8,7 +9,11 @@
   font-size: 14px;
 }
 
-.techs__list-element:last-of-type {
+@media screen and (max-width: 768px) {
+  .techs__list-element {
+    width: 84px;
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 320px) {

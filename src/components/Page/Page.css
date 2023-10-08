@@ -2,10 +2,12 @@
   font-family: 'Inter', 'Arial', sans-serif;
   max-width: 1280px;
   min-width: 320px;
+  min-height: 100vh;
   margin: 0 auto;
   color: #ffffff;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }

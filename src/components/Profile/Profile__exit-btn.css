@@ -5,3 +5,15 @@
   margin-top: 16px;
   margin-bottom: 70px;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__exit-btn {
+    margin-bottom: 269px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__exit-btn {
+    margin-bottom: 40px;
+  }
+}

@@ -1,11 +1,13 @@
 .aboutme__description {
   font-size: 14px;
-  max-width: min(600px, 50%);
+  margin: 0;
+  width: 100%;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 768px) {
   .aboutme__description {
-    max-width: 292px;
+    font-size: 12px;
   }
 }
 

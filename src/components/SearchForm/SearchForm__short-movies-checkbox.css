@@ -9,6 +9,11 @@
   padding: 0;
 }
 
+.searchform__short-movies-checkbox:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
 .searchform__short-movies-checkbox::before {
   content: '';
   width: 16px;
@@ -34,7 +39,6 @@
 }
 
 .searchform__short-movies-checkbox:checked::before {
-  /* content: ''; */
   width: 16px;
   height: 16px;
   display: block;
@@ -46,6 +50,3 @@
   margin: 0;
   padding: 0;
 }
-
-/* .searchform__short-movies-checkbox_checked {
-} */

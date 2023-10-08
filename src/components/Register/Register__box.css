@@ -1,2 +1,8 @@
 .register__box {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.register__box:first-of-type {
+  margin-top: 0;
 }

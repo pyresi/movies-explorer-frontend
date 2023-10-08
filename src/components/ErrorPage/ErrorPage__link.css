@@ -1,5 +1,19 @@
-.errorpage__link {
+.errorpage__btn {
   font-size: 14px;
+  background: none;
+  border: none;
   color: #ff6838;
   margin-bottom: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .errorpage__btn {
+    margin-bottom: 222px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .errorpage__btn {
+    margin-bottom: 30px;
+  }
 }

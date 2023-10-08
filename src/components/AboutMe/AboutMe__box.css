@@ -1,20 +1,29 @@
 .aboutme__box {
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 66px 0 0 0;
+  width: 100%;
+  gap: 49px;
 }
 
 @media screen and (max-width: 768px) {
-  .aboutme {
-    /* position: inherit; */
-    width: 668px;
-    padding: 60px 50px;
-    display: flex;
-    flex-direction: column;
+  .aboutme__box {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .aboutme__box {
+    flex-wrap: wrap-reverse;
   }
 }
 
 @media screen and (max-width: 320px) {
   .aboutme__box {
-    width: 292px;
+    justify-content: center;
     padding: 0;
+    margin: 60px 0 0 0;
+    gap: 40px;
   }
 }

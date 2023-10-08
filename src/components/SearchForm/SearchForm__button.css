@@ -11,3 +11,8 @@
   margin-top: 60px;
   border: none;
 }
+
+.searchform__button:hover {
+  cursor: pointer;
+  opacity: 80%;
+}

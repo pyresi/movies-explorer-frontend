@@ -1,11 +1,16 @@
 .aboutproject__line {
   margin-bottom: 70px;
+  width: calc(100% - 70px);
+}
+
+@media screen and (max-width: 768px) {
+  .aboutproject__line {
+    width: 668px;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .aboutproject__line {
-    margin-bottom: 60px;
-    margin-top: 28px;
     width: 284px;
   }
 }

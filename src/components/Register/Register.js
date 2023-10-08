@@ -11,10 +11,15 @@ import './Register__link.css';
 import './Register__paragraph.css';
 import './Register__login-box.css';
 import { Link } from 'react-router-dom';
+import Logo from '../Logo/Logo';
 
 function Register() {
     return (
         <div className="register">
+            <div className='register__logo-wrapper'>
+                <Logo />
+            </div>
+
             <h1 className='register__header'>Добро пожаловать!</h1>
             <form id='register' className='register__form'>
                 <div className="register__box">
@@ -35,7 +40,7 @@ function Register() {
                 <button type='button' className='register__button'>Зарегистрироваться</button>
                 <div className='register__login-box'>
                     <p className='register__paragraph'>Уже зарегестрированы?</p>
-                    <Link className='register__link' to='/sign-in'>Войти</Link>
+                    <Link className='register__link' to='/signin'>Войти</Link>
                 </div>
             </form>
         </div>

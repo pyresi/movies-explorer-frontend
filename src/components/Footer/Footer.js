@@ -3,6 +3,7 @@ import './Footer__paragraph.css';
 import './Footer__box.css';
 import './Footer__box-element.css';
 import './Footer__links.css';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -10,10 +11,10 @@ function Footer() {
             <p className="footer__paragraph">Учебный проект Яндекс.Практикум х BeatFilm.</p>
             <div className="footer__box">
                 <p className="footer__box-element">© 2023</p>
-                <div className='footer__links'>
-                    <p className="footer__box-element">Яндекс.Практикум</p>
-                    <p className="footer__box-element">GitHub</p>
-                </div>
+                <nav className='footer__links'>
+                    <Link className="footer__box-element" to={'https://practicum.yandex.ru/'}>Яндекс.Практикум</Link>
+                    <Link className="footer__box-element" to={'https://github.com/'}>GitHub</Link>
+                </nav>
             </div>
         </footer>
     );

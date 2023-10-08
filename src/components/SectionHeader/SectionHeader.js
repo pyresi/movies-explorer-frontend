@@ -1,9 +1,9 @@
+import './SectionHeader.css'
 
-// function SectionHeader {
-//     return (
-//         <div>
-//             <h2 className='aboutproject__header'>О проекте</h2>
-//             <hr className='aboutproject__line'></hr>
-//         </div>
-//     )
-// }
+function SectionHeader({ headerText, isSubHeader = false }) {
+    return (
+        <h2 className={'section-header' + (isSubHeader ? ' section-header_type_sub-header ' : '')}>{headerText}</h2>
+    )
+}
+
+export default SectionHeader;

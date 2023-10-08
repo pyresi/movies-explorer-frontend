@@ -1,4 +1,21 @@
 .navigation {
-  width: 211px;
+  margin: 0;
   text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navigation__list-element {
+  font-size: 13px;
+  text-decoration: none;
+  color: white;
+}
+
+.navigation__list-element_black {
+  color: black;
+}
+
+.navigation__list-element_active {
+  font-weight: 500;
 }

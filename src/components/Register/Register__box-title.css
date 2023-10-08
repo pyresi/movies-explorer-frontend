@@ -1,4 +1,6 @@
 .register__box-title {
   font-size: 10px;
   color: #a0a0a0;
+  margin-top: 0;
+  margin-bottom: 10px;
 }

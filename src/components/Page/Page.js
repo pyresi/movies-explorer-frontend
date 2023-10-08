@@ -5,17 +5,19 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import NavTab from '../NavTab/NavTab';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Portfolio from '../Portfolio/Portfolio';
 
 
 
 function Page() {
     return (
         <>
-            <Promo></Promo>
-            <NavTab></NavTab>
-            <AboutProject></AboutProject>
-            <Techs></Techs>
-            <AboutMe></AboutMe>
+            <Promo />
+            <NavTab />
+            <AboutProject />
+            <Techs />
+            <AboutMe />
+            <Portfolio />
         </>
     );
 }

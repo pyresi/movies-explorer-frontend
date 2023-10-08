@@ -2,4 +2,12 @@
   padding-top: 9px;
   padding-bottom: 9px;
   text-align: center;
+
+  font-size: 14px;
+}
+
+@media screen and (max-width: 320px) {
+  .aboutproject__timeline-bar {
+    font-size: 11px;
+  }
 }

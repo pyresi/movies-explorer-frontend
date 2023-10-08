@@ -2,11 +2,14 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   height: 46px;
-  width: 396px;
-  padding-left: 10px;
+  width: calc(100% - 15px);
   border: none;
   color: black;
   font-size: 13px;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 15px;
+}
+
+.register__box-input:focus {
+  outline: 2px solid #ff6838;
 }

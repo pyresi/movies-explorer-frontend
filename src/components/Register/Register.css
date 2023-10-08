@@ -4,4 +4,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 396px;
+  width: 89%;
+  min-width: 270px;
+}
+
+.register__logo-wrapper {
+  margin: 70px auto 40px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .register__logo-wrapper {
+    margin-top: 232px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .register {
+    width: 270px;
+  }
+
+  .register__logo-wrapper {
+    margin-top: 56px;
+    margin-bottom: 50px;
+    margin-left: auto;
+  }
 }

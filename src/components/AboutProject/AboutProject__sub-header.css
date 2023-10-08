@@ -1,7 +1,14 @@
 .aboutproject__sub-header {
   font-size: 20px;
   font-weight: 400;
-  max-width: 550px;
-  margin: 0 0 26px 0;
+  margin: 0;
   padding: 0;
+  line-height: 24.2px;
+}
+
+@media screen and (max-width: 320px) {
+  .aboutproject__sub-header {
+    font-size: 18px;
+    line-height: 21.78px;
+  }
 }
