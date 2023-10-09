@@ -1,0 +1,12 @@
+.register__paragraph {
+  font-size: 14px;
+  margin-top: 16px;
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 320px) {
+  .register__paragraph {
+    font-size: 12px;
+    margin-top: 14px;
+  }
+}

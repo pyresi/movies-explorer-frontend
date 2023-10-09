@@ -1,0 +1,29 @@
+.promo__container {
+  background-image: url(../../images/promo_pic.svg);
+  background-repeat: no-repeat;
+  max-width: 730px;
+  height: 320px;
+  margin-top: 82px;
+  margin-bottom: 122px;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .promo__container {
+    margin: 225px auto 240px auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo__container {
+    max-width: 248px;
+    height: 248px;
+    background-size: contain;
+    margin: 142px auto 180px auto;
+    padding: 0;
+  }
+}

@@ -1,0 +1,14 @@
+.navigation__login-btn {
+  background-color: #2be080;
+  text-decoration: none;
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}

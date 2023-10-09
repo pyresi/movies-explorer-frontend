@@ -1,0 +1,17 @@
+.aboutme__portrait {
+  max-width: 270px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutme__portrait {
+    width: 292px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutme__portrait {
+    width: 292px;
+  }
+}

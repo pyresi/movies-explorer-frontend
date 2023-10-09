@@ -1,0 +1,29 @@
+.section-header {
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding-bottom: 23px;
+}
+
+.section-header_type_sub-header {
+  font-size: 18px;
+  border-bottom: none;
+}
+
+@media screen and (max-width: 768px) {
+  .section-header {
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .section-header {
+    font-size: 18px;
+    padding-bottom: 28px;
+  }
+
+  .section-header_type_sub-header {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,9 @@
+.searchform {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #e8e8e8;
+  width: 100%;
+  min-width: 292px;
+  margin: auto;
+}

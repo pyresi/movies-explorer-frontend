@@ -1,0 +1,7 @@
+.techs__container {
+  width: 89%;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

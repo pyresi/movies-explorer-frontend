@@ -1,0 +1,22 @@
+.portfolio__link-arrow {
+  background-image: url('../../images/arrow.svg');
+  width: 29px;
+  height: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  display: inline-block;
+}
+
+.portfolio__link-arrow:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio__link-arrow {
+    width: 18px;
+    height: 28px;
+  }
+}

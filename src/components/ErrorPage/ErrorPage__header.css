@@ -1,0 +1,19 @@
+.errorpage__header {
+  font-size: 140px;
+  font-weight: 400;
+  margin: 246px 0 0 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .errorpage__header {
+    margin: 408px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .errorpage__header {
+    margin: 329px 0 0 0;
+    font-size: 80px;
+  }
+}

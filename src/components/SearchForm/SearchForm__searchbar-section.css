@@ -1,0 +1,9 @@
+.searchform__searchbar-section {
+  display: flex;
+  align-items: center;
+}
+
+/* @media screen and (max-width: 320px) {
+  .searchform__searchbar-section {
+  }
+} */

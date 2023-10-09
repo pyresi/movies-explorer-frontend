@@ -1,0 +1,12 @@
+.errorpage__paragraph {
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 184px;
+  padding: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .errorpage__paragraph {
+    margin-bottom: 284px;
+  }
+}

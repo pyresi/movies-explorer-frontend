@@ -1,0 +1,14 @@
+.navigation__regiser-btn {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.navigation__regiser-btn:hover {
+  opacity: 70%;
+}
+
+.navigation__regiser-btn_black {
+  color: black;
+}

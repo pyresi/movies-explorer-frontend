@@ -1,0 +1,17 @@
+.account-button {
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  border: none;
+  width: 100px;
+  font-size: 14px;
+  color: black;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.account-button:hover {
+  opacity: 80%;
+}

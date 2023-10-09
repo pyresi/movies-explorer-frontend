@@ -1,0 +1,16 @@
+.footer {
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    background-color: white;
+  }
+}

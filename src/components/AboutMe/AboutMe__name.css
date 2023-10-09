@@ -1,0 +1,18 @@
+.aboutme__name {
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutme__name {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutme__name {
+    font-size: 30px;
+  }
+}

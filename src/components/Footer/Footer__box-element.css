@@ -1,0 +1,10 @@
+.footer__box-element {
+  font-size: 13px;
+  color: black;
+  margin: 0;
+  text-decoration: none;
+}
+
+.footer__box-element:hover {
+  opacity: 70%;
+}

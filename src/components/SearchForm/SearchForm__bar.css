@@ -1,0 +1,14 @@
+.searchform__bar {
+  background-color: #f9f9f9;
+  border-radius: 40px;
+  width: 100%;
+  margin-top: 60px;
+  height: 46px;
+  padding-left: 10px;
+  border: none;
+}
+
+/* @media screen and (max-width: 320px) {
+  .searchform__bar {
+  }
+} */

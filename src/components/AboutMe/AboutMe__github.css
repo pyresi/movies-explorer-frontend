@@ -1,0 +1,12 @@
+.aboutme__github {
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  text-decoration: none;
+  color: black;
+  margin-top: auto;
+}
+
+.aboutme__github:hover {
+  opacity: 70%;
+}
