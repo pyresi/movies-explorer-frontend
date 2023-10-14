@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import './AccountButton.css';
 
-function AccountButton() {
-    return (<Link className='account-button' to='/profile'>Аккаунт</Link>);
+function AccountButton({ onClick }) {
+    return (<Link className='account-button' to='/profile' onClick={onClick}>Аккаунт</Link>);
 }
 
 export default AccountButton;

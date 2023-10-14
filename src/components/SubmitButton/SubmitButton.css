@@ -1,0 +1,57 @@
+.submit-button {
+  width: 100%;
+  height: 45px;
+  border-radius: 3px;
+  background-color: #ff6838;
+  border: none;
+  color: white;
+}
+
+.submit-button:disabled {
+  background-color: gray;
+}
+
+.submit-button:disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+.submit-button:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+
+.submit-button__container {
+  /* margin-top: 96px; */
+  width: 100%;
+}
+
+.submit-button__error-message {
+  font-size: 11px;
+  color: red;
+  margin: 0 0 20px 0;
+  width: 100%;
+  line-height: 13.31px;
+  text-align: center;
+  opacity: 0;
+  height: 14px;
+  /* display: none; */
+  /* padding-top: 10px; */
+}
+
+.submit-button__error-message_active {
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .submit-button__container {
+    /* margin-top: 69px; */
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .submit-button__container {
+    /* margin-top: 150px; */
+    width: 260px;
+  }
+}
