@@ -22,7 +22,10 @@ function App() {
   // general states
   const [isSideMenuActive, setIsSideMenuActive] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({}); //хук состояния. нужен для изменения состояния компонента
+  const [currentUser, setCurrentUser] = useState({});
+  const [baseMaxMovieCards, setBaseMaxMovieCards] = useState(16);
+  const [numberOfAdditionalCards, setNumberOfAdditionalCards] = useState(4);
+
   // const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
   // const [email, setEmail] = useState('');
   // -----------------------------
@@ -32,14 +35,20 @@ function App() {
   const [moviesShortFilmToggle, setMoviesShortFilmToggle] = useState(false);
   const [moviesMoreBtnClickedTimes, setMoviesMoreBtnClickedTimes] = useState(0);
   const [wasSearched, setWasSearched] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
   const [moviesToShow, setMoviesToShow] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [moviesQuery, setMoviesQuery] = useState('');
+  const [maxMoviesToShow, setMaxMoviesToShow] = useState(16);
+  const [totalMoviesToShow, setTotalMoviesToShow] = useState(0);
   // -----------------------------
 
   //Saved-movies states
-
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMoviesToShow, setSavedMoviesToShow] = useState([]);
+  const [savedMoviesShortFilmToggle, setSavedMoviesShortFilmToggle] = useState(false);
+  const [savedMoviesMoreBtnClickedTimes, setSavedMoviesMoreBtnClickedTimes] = useState(0);
+  const [maxSavedMoviesToShow, setMaxSavedMoviesToShow] = useState(16);
+  const [totalSavedMoviesToShow, setTotalSavedMoviesToShow] = useState(0);
   // -----------------------------
 
   //Profile
@@ -103,16 +112,15 @@ function App() {
     localStorage.setItem('moviesQuery', query);
   }
 
-  function queryMovies(query, isShortAllowed) {
+  function queryMovies(query) {
     setWasSearched(true);
     setIsLoading(true);
-    console.log(query);
     query = query.toLowerCase();
 
     moviesApi.call().then((res) => {
       const filtered = res.filter((x) => {
         return x.nameRU.toLowerCase().includes(query);
-      });
+      }).map((x) => { return { ...x, thumbnail: 'https://api.nomoreparties.co' + x.image.url } });
 
       localStorage.setItem('fetchedMovies', JSON.stringify(filtered));
       setFetchedMovies(filtered);
@@ -126,17 +134,44 @@ function App() {
   }
 
   useEffect(() => {
-    // console.log('Effect');
-    if (fetchedMovies.length === 0) {
-      setIsEmpty(true);
-    }
-    else {
-      const filteredMovies = filterShortMovies(fetchedMovies, moviesShortFilmToggle);
-      setMoviesToShow(filteredMovies);
-      setIsEmpty(false);
-    }
+    const filteredMovies = filterShortMovies(fetchedMovies, moviesShortFilmToggle);
+    setTotalMoviesToShow(filteredMovies.length);
+    setMoviesToShow(filteredMovies.slice(0, maxMoviesToShow));
     setIsLoading(false);
-  }, [fetchedMovies, moviesMoreBtnClickedTimes, moviesShortFilmToggle]);
+  }, [fetchedMovies, maxMoviesToShow, moviesShortFilmToggle,]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (windowSize.innerWidth > 768) {
+        setNumberOfAdditionalCards(4);
+        setBaseMaxMovieCards(16);
+      }
+      else if (windowSize.innerWidth <= 768) {
+        setNumberOfAdditionalCards(2);
+        setBaseMaxMovieCards(8);
+      }
+
+      if (windowSize.innerWidth <= 320) {
+        setBaseMaxMovieCards(5);
+      }
+    }, 10)
+    return () => clearTimeout(timer);
+  }, [windowSize])
+
+  useEffect(() => {
+    setMaxMoviesToShow(baseMaxMovieCards + moviesMoreBtnClickedTimes * numberOfAdditionalCards);
+  }, [baseMaxMovieCards, numberOfAdditionalCards, moviesMoreBtnClickedTimes])
+
+  useEffect(() => {
+    setMaxSavedMoviesToShow(baseMaxMovieCards + savedMoviesMoreBtnClickedTimes * numberOfAdditionalCards);
+  }, [baseMaxMovieCards, numberOfAdditionalCards, savedMoviesMoreBtnClickedTimes])
+
+  useEffect(() => {
+    const filteredMovies = filterShortMovies(savedMovies, savedMoviesShortFilmToggle);
+    setTotalSavedMoviesToShow(filteredMovies.length);
+    setSavedMoviesToShow(filteredMovies.slice(0, maxSavedMoviesToShow));
+
+  }, [savedMovies, maxSavedMoviesToShow, savedMoviesShortFilmToggle]);
 
   function handleRegisterClick(name, email, password) {
     mainApi
@@ -158,13 +193,12 @@ function App() {
   }
 
   function initialize() {
-    return (
-      mainApi.getUserInfo()
-        .then((userData) => {
-          setCurrentUser(userData.data);
-        })
-        .catch(console.error)
-    );
+    Promise.all([mainApi.getUserInfo(), mainApi.getMovies()]).then(([userData, savedMovies]) => {
+      setCurrentUser(userData.data);
+
+      setSavedMovies(savedMovies.data);
+      localStorage.setItem('savedMovies', JSON.stringify(savedMovies.data));
+    }).catch(console.error);
   }
 
   function handleLoginClick(email, password) {
@@ -227,6 +261,46 @@ function App() {
       .catch(console.error)
   }
 
+  function handleLikeClick(movieInfo) {
+    const filtered = savedMovies.filter(x => movieInfo.id === x.movieId);
+    if (filtered.length > 0) {
+      deleteMovie(filtered[0]);
+    }
+    else {
+      addMovie(movieInfo);
+    }
+  }
+
+  function addMovie(movieInfo) {
+    mainApi.postMovie({
+      country: movieInfo.country,
+      director: movieInfo.director,
+      duration: movieInfo.duration,
+      year: movieInfo.year,
+      description: movieInfo.description,
+      image: 'https://api.nomoreparties.co' + movieInfo.image.url,
+      trailerLink: movieInfo.trailerLink,
+      nameRU: movieInfo.nameRU,
+      nameEN: movieInfo.nameEN,
+      thumbnail: 'https://api.nomoreparties.co' + movieInfo.image.url,
+      movieId: movieInfo.id
+    }).then((res) => {
+      console.log(res);
+      setSavedMovies([...savedMovies, res.data]);
+    }).catch(console.error);
+  }
+
+  function deleteMovie(movieInfo) {
+    mainApi.deleteMovie({ movieId: movieInfo._id }).then((res) => {
+      console.log(res);
+      setSavedMovies((state) => state.filter((item) => item.movieId !== res.data.movieId));
+    }).catch(console.error);
+  }
+
+  useEffect(() => {
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies])
+
   return (
     <div className="page">
       <AppContext.Provider value={{ isLoading, setIsLoading, isSideMenuActive, setIsSideMenuActive }}>
@@ -250,7 +324,6 @@ function App() {
                 element={Movies}
                 moviesQuery={moviesQuery}
                 setMoviesQuery={handleMoviesQueryChange}
-                isEmpty={isEmpty}
                 isLoading={isLoading}
                 moviesToShow={moviesToShow}
                 setMoviesShortFilmToggle={handleMoviesShortFilmToggle}
@@ -259,9 +332,26 @@ function App() {
                 setMoviesMoreBtnClickedTimes={setMoviesMoreBtnClickedTimes}
                 moviesMoreBtnClickedTimes={moviesMoreBtnClickedTimes}
                 moviesShortFilmToggle={moviesShortFilmToggle}
+                handleLikeClick={handleLikeClick}
+                savedMovies={savedMovies}
+                maxMoviesToShow={maxMoviesToShow}
+                totalMoviesToShow={totalMoviesToShow}
               />
             } />
-            <Route path="/saved-movies" element={<ProtectedRoute loggedIn={isLoggedIn} element={SavedMovies} />} />
+            <Route path="/saved-movies" element={
+              <ProtectedRoute
+                loggedIn={isLoggedIn}
+                element={SavedMovies}
+                savedMoviesShortFilmToggle={savedMoviesShortFilmToggle}
+                setSavedMoviesShortFilmToggle={setSavedMoviesShortFilmToggle}
+                savedMoviesMoreBtnClickedTimes={savedMoviesMoreBtnClickedTimes}
+                setSavedMoviesMoreBtnClickedTimes={setSavedMoviesMoreBtnClickedTimes}
+                handleLikeClick={deleteMovie}
+                moviesToShow={savedMoviesToShow}
+                savedMovies={savedMovies}
+                totalMoviesToShow={totalSavedMoviesToShow}
+                maxMoviesToShow={maxSavedMoviesToShow}
+              />} />
             <Route path="*" element={<ErrorPage />} status={404} />
           </Routes>
           <SideMenu handleCloseSideMenuButtonClick={handleCloseSideMenuButtonClick} />
