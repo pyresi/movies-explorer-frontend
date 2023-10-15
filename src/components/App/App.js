@@ -46,7 +46,7 @@ function App() {
 
   //Saved-movies states
   const [savedMovies, setSavedMovies] = useState([]);
-  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
+  // const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [savedMoviesToShow, setSavedMoviesToShow] = useState([]);
   const [savedMoviesShortFilmToggle, setSavedMoviesShortFilmToggle] = useState(false);
   const [savedMoviesMoreBtnClickedTimes, setSavedMoviesMoreBtnClickedTimes] = useState(0);
@@ -222,7 +222,7 @@ function App() {
       setCurrentUser(userData.data);
 
       setSavedMovies(savedMovies.data);
-      setFilteredSavedMovies(savedMovies.data);
+      // setFilteredSavedMovies(savedMovies.data);
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies.data));
     }).catch(console.error);
   }

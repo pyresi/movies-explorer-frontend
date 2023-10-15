@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import '../Register/Register.css';
-import { validateEmail, validateForm, validatePassword } from "../../utils/utils";
+import { validateEmail, validatePassword } from "../../utils/utils";
 import { useFormWithValidation } from "../../utils/UseFormWithValidation";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
@@ -32,7 +32,7 @@ function Login({ onLoginClick, loginErrorMessage }) {
     }
 
     const numberOfInputs = 2;
-    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(validate, numberOfInputs);
+    const { values, handleChange, errors, isValid } = useFormWithValidation(validate, numberOfInputs);
 
     function onSubmit(e) {
         e.preventDefault()

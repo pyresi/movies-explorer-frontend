@@ -5,7 +5,7 @@ import './Profile__box-key.css';
 import './Profile__box-value.css';
 import './Profile__edit-btn.css';
 import './Profile__exit-btn.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/UseFormWithValidation';
 import SubmitButton from '../SubmitButton/SubmitButton';
@@ -47,7 +47,7 @@ function Profile({
     }
 
     const numberOfInputs = 2;
-    const { values, handleChange, errors, isValid, resetForm, setValues } = useFormWithValidation(validate, numberOfInputs);
+    const { values, handleChange, isValid, setValues } = useFormWithValidation(validate, numberOfInputs);
 
 
 

@@ -4,15 +4,3 @@
   gap: 6px;
   /* margin-bottom: 70px; */
 }
-
-@media screen and (max-width: 768px) {
-  .register__login-box {
-    /* margin-bottom: 232px; */
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .register__login-box {
-    /* margin-bottom: 30px; */
-  }
-}

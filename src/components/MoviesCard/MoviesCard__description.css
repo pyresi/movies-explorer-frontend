@@ -7,9 +7,3 @@
   position: relative;
   padding: 0;
 }
-
-@media screen and (max-width: 320px) {
-  .moviescard__description {
-    /* margin: 10px 10px; */
-  }
-}
