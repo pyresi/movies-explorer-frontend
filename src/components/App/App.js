@@ -144,14 +144,14 @@ function App() {
     // setFilteredSavedMovies(filtered);
   }
 
-  function filterShortMovies(movies, isShortAllowed) {
+  function filterShortMovies(movies, isAllAllowed) {
     return movies.filter((x) => {
-      return isShortAllowed ? true : (x.duration >= 45);
+      return isAllAllowed ? true : (x.duration <= 40);
     })
   }
 
   useEffect(() => {
-    const filteredMovies = filterShortMovies(fetchedMovies, moviesShortFilmToggle);
+    const filteredMovies = filterShortMovies(fetchedMovies, !moviesShortFilmToggle);
     setTotalMoviesToShow(filteredMovies.length);
     setMoviesToShow(filteredMovies.slice(0, maxMoviesToShow));
     setIsLoading(false);
@@ -189,7 +189,7 @@ function App() {
 
     const filteredMovies = filterShortMovies(savedMovies.filter((x) => {
       return x.nameRU.toLowerCase().includes(query);
-    }), savedMoviesShortFilmToggle);
+    }), !savedMoviesShortFilmToggle);
     setTotalSavedMoviesToShow(filteredMovies.length);
     setSavedMoviesToShow(filteredMovies.slice(0, maxSavedMoviesToShow));
     setIsSavedMoviesLoading(false);
