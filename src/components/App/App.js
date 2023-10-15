@@ -119,6 +119,10 @@ function App() {
     localStorage.setItem('moviesQuery', query);
   }
 
+  function checkIfMovieNameHasSubstring(movie, substring) {
+    return (movie.nameRU.toLowerCase().includes(substring)) || (movie.nameEN.toLowerCase().includes(substring))
+  }
+
   function queryMovies(query) {
     setWasSearched(true);
     setIsLoading(true);
@@ -128,7 +132,7 @@ function App() {
 
     moviesApi.call().then((res) => {
       const filtered = res.filter((x) => {
-        return x.nameRU.toLowerCase().includes(query);
+        return checkIfMovieNameHasSubstring(x, query);
       }).map((x) => { return { ...x, thumbnail: 'https://api.nomoreparties.co' + x.image.url } });
 
       localStorage.setItem('fetchedMovies', JSON.stringify(filtered));
@@ -188,7 +192,7 @@ function App() {
     const query = savedMoviesQuery.toLowerCase();
 
     const filteredMovies = filterShortMovies(savedMovies.filter((x) => {
-      return x.nameRU.toLowerCase().includes(query);
+      return checkIfMovieNameHasSubstring(x, query);
     }), !savedMoviesShortFilmToggle);
     setTotalSavedMoviesToShow(filteredMovies.length);
     setSavedMoviesToShow(filteredMovies.slice(0, maxSavedMoviesToShow));
