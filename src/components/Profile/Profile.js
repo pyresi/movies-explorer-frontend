@@ -12,15 +12,15 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import { validateEmail, validateName } from '../../utils/utils';
 
 
-function Profile({ onLogOut, isEditing, setIsEditing, editProfile, errorMsg }) {
+function Profile({
+    onLogOut,
+    isEditing,
+    setIsEditing,
+    editProfile, errorMsg }) {
     const { currentUser } = useContext(UserContext);
-    // const [oldName, setOldName] = setValues(useContext.name);
-    // const [oldEmail, setOldEmail] = setValues(useContext.email);
+
 
     function validate(name, value) {
-        console.log(currentUser.name);
-        console.log(currentUser.email);
-        console.log(values);
         if ((currentUser.email === values['profile-email']) && (currentUser.name === values['profile-name'])) {
             return 'Ничего не поменялось';
         }
@@ -73,7 +73,7 @@ function Profile({ onLogOut, isEditing, setIsEditing, editProfile, errorMsg }) {
 
     return (
         <div className="profile">
-            <h1 className="profile__header">Привет, Анастасия!</h1>
+            <h1 className="profile__header">Привет, {currentUser.name}!</h1>
             <form className='profile__form' name='profile-form' onSubmit={onSubmit}>
                 <div className='profile__inputs'>
                     <div className='profile__box'>
@@ -89,7 +89,7 @@ function Profile({ onLogOut, isEditing, setIsEditing, editProfile, errorMsg }) {
                 </div>
 
                 {isEditing
-                    ? <SubmitButton buttonText={'Сохранить'} isValid={isValid} errorMsg={''} />
+                    ? <SubmitButton buttonText={'Сохранить'} isValid={isValid} errorMsg={errorMsg} />
                     : <>
                         <button type='button' className='profile__edit-btn' onClick={handleEditClick}>Редактировать</button>
                         <button type='button' className='profile__exit-btn' onClick={onLogOut}>Выйти из аккаунта</button>

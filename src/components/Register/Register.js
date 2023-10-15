@@ -11,13 +11,13 @@ import './Register__paragraph.css';
 import './Register__login-box.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useFormWithValidation } from '../../utils/UseFormWithValidation';
 import { validateEmail, validateName, validatePassword } from '../../utils/utils';
 import SubmitButton from '../SubmitButton/SubmitButton';
 
 
-function Register({ onRegisterClick }) {
+function Register({ onRegisterClick, registerErrorMessage }) {
 
     function validate(name, value) {
         switch (name) {
@@ -92,12 +92,16 @@ function Register({ onRegisterClick }) {
                     <p className={'register__box-error' + (errors['register-password'] ? ' register__box-error_active' : '')}>{errors['register-password']}</p>
                 </div>
 
-                <SubmitButton errorMsg={'test'} isValid={isValid} buttonText={'Зарегестрироваться'} />
+                <div className='register__buttons-box'>
+                    <SubmitButton errorMsg={registerErrorMessage} isValid={isValid} buttonText={'Зарегестрироваться'} />
 
-                <div className='register__login-box'>
-                    <p className='register__paragraph'>Уже зарегестрированы?</p>
-                    <Link className='register__link' to='/signin'>Войти</Link>
+                    <div className='register__login-box'>
+                        <p className='register__paragraph'>Уже зарегестрированы?</p>
+                        <Link className='register__link' to='/signin'>Войти</Link>
+                    </div>
                 </div>
+
+
             </form >
         </div >
 

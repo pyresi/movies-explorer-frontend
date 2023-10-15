@@ -7,7 +7,7 @@ import './Navigation__register-block.css';
 import './Navigation__register-btn.css';
 import './Navigation__login-btn.css';
 import { Link, useLocation } from 'react-router-dom';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../contexts/CurrentAppContext';
 import Logo from '../Logo/Logo';
 import { UserContext } from '../../contexts/CurrentUserContext';

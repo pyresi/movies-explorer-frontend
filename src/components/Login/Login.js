@@ -5,7 +5,7 @@ import { validateEmail, validateForm, validatePassword } from "../../utils/utils
 import { useFormWithValidation } from "../../utils/UseFormWithValidation";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
-function Login({ onLoginClick }) {
+function Login({ onLoginClick, loginErrorMessage }) {
 
     function validate(name, value) {
         switch (name) {
@@ -56,12 +56,14 @@ function Login({ onLoginClick }) {
                     <input className="register__box-input" name='login-password' required onChange={handleChange} value={values['login-password'] || ''} />
                     <p className={'register__box-error' + (errors['login-password'] ? ' register__box-error_active' : '')}>{errors['login-email']}</p>
                 </div>
-
-                <SubmitButton errorMsg={''} buttonText={'Войти'} isValid={isValid} />
-                <div className='register__login-box'>
-                    <p className='register__paragraph'>Еще не зарегестрированы?</p>
-                    <Link className='register__link' to='/signup'>Регистрация</Link>
+                <div className="register__buttons-box">
+                    <SubmitButton errorMsg={loginErrorMessage} buttonText={'Войти'} isValid={isValid} />
+                    <div className='register__login-box'>
+                        <p className='register__paragraph'>Еще не зарегестрированы?</p>
+                        <Link className='register__link' to='/signup'>Регистрация</Link>
+                    </div>
                 </div>
+
             </form>
         </div>
 

@@ -12,12 +12,14 @@ function SavedMovies({
     savedMoviesMoreBtnClickedTimes,
     setSavedMoviesMoreBtnClickedTimes,
     maxMoviesToShow,
-    totalMoviesToShow
+    totalMoviesToShow,
+    queryMovies,
+    isSavedMoviesLoading
 }) {
-
 
     let moviesComponent = <MoviesCardList
         isSaved={true}
+        isLoading={isSavedMoviesLoading}
         handleLikeClick={handleLikeClick}
         moviesToShow={moviesToShow}
         savedMovies={savedMovies}
@@ -32,10 +34,8 @@ function SavedMovies({
             <div className="movies">
                 <SearchForm
                     setMoviesShortFilmToggle={setSavedMoviesShortFilmToggle}
-                    // queryMovies={queryMovies}
+                    queryMovies={queryMovies}
                     moviesShortFilmToggle={savedMoviesShortFilmToggle}
-                // moviesQuery={moviesQuery}
-                // setMoviesQuery={setMoviesQuery}
                 />
                 {moviesComponent}
             </div>

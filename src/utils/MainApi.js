@@ -1,6 +1,9 @@
+import { MAIN_API_URL } from "./constants";
+
+
 class MainApi {
     constructor() {
-        // this.baseUrl = 'https://api.pyresi.movies.nomoredomainsicu.ru';
+        this.baseUrl = MAIN_API_URL;
         this.baseUrl = 'http://localhost:3001';
     }
 
@@ -22,7 +25,15 @@ class MainApi {
             return res.json();
         }
 
-        return Promise.reject(`Ошибка: ${res.status}`);
+        try {
+            return res.json().then((res) => {
+                return Promise.reject(res);
+            })
+        }
+        catch {
+            return Promise.reject({ message: `Что-то пошло не так:( Ошибка с кодом: ${res.status}` });
+        }
+
     }
 
     registerUser(name, email, password) {

@@ -15,6 +15,8 @@ import { UserContext } from '../../contexts/CurrentUserContext';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import InfoTooltop from '../InfoTooltip/InfoTooltip';
+import { MOVIE_API_URL_PREFIX } from '../../utils/constants';
 
 
 function App() {
@@ -44,11 +46,14 @@ function App() {
 
   //Saved-movies states
   const [savedMovies, setSavedMovies] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [savedMoviesToShow, setSavedMoviesToShow] = useState([]);
   const [savedMoviesShortFilmToggle, setSavedMoviesShortFilmToggle] = useState(false);
   const [savedMoviesMoreBtnClickedTimes, setSavedMoviesMoreBtnClickedTimes] = useState(0);
   const [maxSavedMoviesToShow, setMaxSavedMoviesToShow] = useState(16);
   const [totalSavedMoviesToShow, setTotalSavedMoviesToShow] = useState(0);
+  const [isSavedMoviesLoading, setIsSavedMoviesLoading] = useState(false);
+  const [savedMoviesQuery, setSavedMoviesQuery] = useState('');
   // -----------------------------
 
   //Profile
@@ -64,6 +69,10 @@ function App() {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   // -----------------------------
 
+  //Login
+  const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
+  const [isToolTipSuccess, setIsToolTipSuccess] = useState(false);
+  // -----------------------------
 
   function getWindowSize() {
     const { innerWidth, innerHeight } = window;
@@ -84,9 +93,7 @@ function App() {
 
   const [windowSize, setWindowSize] = useState(getWindowSize());
 
-  // const location = useLocation();
   const navigate = useNavigate();
-
 
   function handleCloseSideMenuButtonClick() {
     setIsSideMenuActive(false);
@@ -115,6 +122,8 @@ function App() {
   function queryMovies(query) {
     setWasSearched(true);
     setIsLoading(true);
+    handleMoviesQueryChange(query)
+    // setMoviesQuery(query);
     query = query.toLowerCase();
 
     moviesApi.call().then((res) => {
@@ -125,6 +134,14 @@ function App() {
       localStorage.setItem('fetchedMovies', JSON.stringify(filtered));
       setFetchedMovies(filtered);
     }).catch(console.error);
+  }
+
+  function querySavedMovies(query) {
+    setIsSavedMoviesLoading(true);
+    setSavedMoviesQuery(query);
+    query = query.toLowerCase();
+
+    // setFilteredSavedMovies(filtered);
   }
 
   function filterShortMovies(movies, isShortAllowed) {
@@ -166,24 +183,32 @@ function App() {
     setMaxSavedMoviesToShow(baseMaxMovieCards + savedMoviesMoreBtnClickedTimes * numberOfAdditionalCards);
   }, [baseMaxMovieCards, numberOfAdditionalCards, savedMoviesMoreBtnClickedTimes])
 
+
   useEffect(() => {
-    const filteredMovies = filterShortMovies(savedMovies, savedMoviesShortFilmToggle);
+    const query = savedMoviesQuery.toLowerCase();
+
+    const filteredMovies = filterShortMovies(savedMovies.filter((x) => {
+      return x.nameRU.toLowerCase().includes(query);
+    }), savedMoviesShortFilmToggle);
     setTotalSavedMoviesToShow(filteredMovies.length);
     setSavedMoviesToShow(filteredMovies.slice(0, maxSavedMoviesToShow));
+    setIsSavedMoviesLoading(false);
 
-  }, [savedMovies, maxSavedMoviesToShow, savedMoviesShortFilmToggle]);
+  }, [savedMovies, maxSavedMoviesToShow, savedMoviesShortFilmToggle, savedMoviesQuery]);
 
   function handleRegisterClick(name, email, password) {
     mainApi
       .registerUser(name, email, password)
-      .then(() => {
-        // setIsRegistrationSuccess(true);
-        navigate('/signin');
+      .then((res) => {
+        setIsToolTipSuccess(true);
+        setIsInfoTooltipOpened(true);
+        localStorage.setItem('token', res.data.token);
+        login();
+      }).then(() => {
+        initialize();
       })
-      .catch(() => {
-
-        // setIsAuthorizationPopupOpen(true);
-        // setIsRegistrationSuccess(false);
+      .catch((err) => {
+        setRegisterErrorMessage(err.message);
       });
   }
 
@@ -197,6 +222,7 @@ function App() {
       setCurrentUser(userData.data);
 
       setSavedMovies(savedMovies.data);
+      setFilteredSavedMovies(savedMovies.data);
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies.data));
     }).catch(console.error);
   }
@@ -205,31 +231,35 @@ function App() {
     mainApi
       .loginUser(email, password)
       .then((res) => {
+
         localStorage.setItem('token', res.token);
         login();
-        // initialize();
+      }).then(() => {
+        initialize();
+        setLoginErrorMessage('');
       })
       .catch((err) => {
-        console.error(err);
-        // setIsAuthorizationPopupOpen(true);
-        // setIsRegistrationSuccess(false);
+        setLoginErrorMessage(err.message);
       });
   }
 
   function handleLogoutClick() {
     localStorage.clear();
-    // localStorage.removeItem('token');
+    setIsLoggedIn(false);
     navigate('/');
   }
 
   useEffect(() => {
-    mainApi
-      .verifyUser()
-      .then((res) => {
-        setIsLoggedIn(true);
-      })
-      .then(initialize)
-      .catch(console.error);
+    if (localStorage.getItem('token')) {
+      mainApi
+        .verifyUser()
+        .then(() => {
+          setIsLoggedIn(true);
+        })
+        .then(initialize)
+        .catch(console.error);
+    }
+
   }, []);
 
   useEffect(() => {
@@ -255,10 +285,15 @@ function App() {
   function handleEditProfileSubmit(name, email) {
     mainApi.patchuserInfo(name, email)
       .then((userData) => {
+        setIsToolTipSuccess(true);
+        setIsInfoTooltipOpened(true);
         setCurrentUser(userData.data);
         setIsEditing(false);
+        setProfileErrorMessage('');
       })
-      .catch(console.error)
+      .catch((err) => {
+        setProfileErrorMessage(err.message);
+      })
   }
 
   function handleLikeClick(movieInfo) {
@@ -278,11 +313,11 @@ function App() {
       duration: movieInfo.duration,
       year: movieInfo.year,
       description: movieInfo.description,
-      image: 'https://api.nomoreparties.co' + movieInfo.image.url,
+      image: MOVIE_API_URL_PREFIX + movieInfo.image.url,
       trailerLink: movieInfo.trailerLink,
       nameRU: movieInfo.nameRU,
       nameEN: movieInfo.nameEN,
-      thumbnail: 'https://api.nomoreparties.co' + movieInfo.image.url,
+      thumbnail: MOVIE_API_URL_PREFIX + movieInfo.image.url,
       movieId: movieInfo.id
     }).then((res) => {
       console.log(res);
@@ -308,22 +343,35 @@ function App() {
           <Header windowSize={windowSize} />
           <Routes>
             <Route path="/" element={<Page />} />
-            <Route path="/signup" element={<Register onRegisterClick={handleRegisterClick} />} />
-            <Route path="/signin" element={<Login onLoginClick={handleLoginClick} />} />
+            <Route path="/signup" element={
+              <ProtectedRoute
+                loggedIn={!isLoggedIn}
+                element={Register}
+                onRegisterClick={handleRegisterClick}
+                registerErrorMessage={registerErrorMessage}
+              />} />
+            <Route path="/signin" element={
+              <ProtectedRoute
+                loggedIn={!isLoggedIn}
+                element={Login}
+                loginErrorMessage={loginErrorMessage}
+                onLoginClick={handleLoginClick}
+              />} />
             <Route path="/profile" element={
-              <Profile
+              <ProtectedRoute
+                loggedIn={isLoggedIn}
+                element={Profile}
                 onLogOut={handleLogoutClick}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
                 editProfile={handleEditProfileSubmit}
+                errorMsg={profileErrorMessage}
               />
             } />
             <Route path="/movies" element={
               <ProtectedRoute
                 loggedIn={isLoggedIn}
                 element={Movies}
-                moviesQuery={moviesQuery}
-                setMoviesQuery={handleMoviesQueryChange}
                 isLoading={isLoading}
                 moviesToShow={moviesToShow}
                 setMoviesShortFilmToggle={handleMoviesShortFilmToggle}
@@ -336,6 +384,7 @@ function App() {
                 savedMovies={savedMovies}
                 maxMoviesToShow={maxMoviesToShow}
                 totalMoviesToShow={totalMoviesToShow}
+                defaultSearchText={moviesQuery}
               />
             } />
             <Route path="/saved-movies" element={
@@ -351,10 +400,17 @@ function App() {
                 savedMovies={savedMovies}
                 totalMoviesToShow={totalSavedMoviesToShow}
                 maxMoviesToShow={maxSavedMoviesToShow}
+                queryMovies={querySavedMovies}
+                isSavedMoviesLoading={isSavedMoviesLoading}
               />} />
             <Route path="*" element={<ErrorPage />} status={404} />
           </Routes>
           <SideMenu handleCloseSideMenuButtonClick={handleCloseSideMenuButtonClick} />
+          <InfoTooltop
+            isOpen={isInfoTooltipOpened}
+            setIsOpened={setIsInfoTooltipOpened}
+            isSuccess={isToolTipSuccess}
+          />
         </UserContext.Provider>
       </AppContext.Provider>
     </div>

@@ -17,6 +17,8 @@
 .moviescardlist__empty-message {
   color: #afafaf;
   font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .moviescardlist__more-btn {

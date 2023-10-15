@@ -17,7 +17,8 @@ function Movies({
     handleLikeClick,
     savedMovies,
     maxMoviesToShow,
-    totalMoviesToShow
+    totalMoviesToShow,
+    defaultSearchText
 }) {
     let moviesComponent = <></>;
     if (wasSearched) {
@@ -41,8 +42,7 @@ function Movies({
                     setMoviesShortFilmToggle={setMoviesShortFilmToggle}
                     queryMovies={queryMovies}
                     moviesShortFilmToggle={moviesShortFilmToggle}
-                    moviesQuery={moviesQuery}
-                    setMoviesQuery={setMoviesQuery}
+                    defaultSearchText={defaultSearchText}
                 />
                 {moviesComponent}
             </div>

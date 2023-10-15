@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import './SubmitButton.css';
 
 function SubmitButton({ isValid, buttonText, errorMsg }) {
+    useEffect(() => {
+        console.log(errorMsg);
+    }, [errorMsg]);
+
     return <>
         <div className='submit-button__container'>
             <p

@@ -1,3 +1,5 @@
+import { MOVIE_API_URL } from "./constants";
+
 class MoviesApi {
     _checkResponse(res) {
         if (res.ok) {
@@ -8,7 +10,7 @@ class MoviesApi {
     }
 
     call() {
-        return fetch(`https://api.nomoreparties.co/beatfilm-movies`,
+        return fetch(MOVIE_API_URL,
             { 'Content-Type': 'application/json', }
         ).then(this._checkResponse)
     }

@@ -5,3 +5,7 @@
   border: none;
   text-align: right;
 }
+
+.profile__box-value:disabled {
+  background-color: rgba(0, 0, 0, 0);
+}

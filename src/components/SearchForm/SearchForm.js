@@ -5,25 +5,24 @@ import './SearchForm__searchbar-section.css';
 import './SearchForm__short-movies-section.css';
 import './SearchForm__short-movies-checkbox.css';
 import './SearchForm__short-movies-checkbox-description.css';
+import { useState } from 'react';
 
 function SearchForm({
     moviesShortFilmToggle,
     setMoviesShortFilmToggle,
     queryMovies,
-    moviesQuery,
-    setMoviesQuery,
+    defaultSearchText = ''
 }) {
 
-    // const [searchText, setSearchText] = useState('')
+    const [searchText, setSearchText] = useState(defaultSearchText);
 
     function handleInputChange(e) {
-        setMoviesQuery(e.target.value);
-        // console.log(searchText);
+        setSearchText(e.target.value);
     }
 
     function handleSearch(e) {
         e.preventDefault();
-        queryMovies(moviesQuery);
+        queryMovies(searchText);
     }
 
     function handleShortToggle(e) {
@@ -33,7 +32,7 @@ function SearchForm({
     return (
         <form name='searchform' className='searchform' onSubmit={handleSearch} >
             <div className='searchform__searchbar-section'>
-                <input name='search-bar' type='text' className='searchform__bar' placeholder='Фильм' required value={moviesQuery}
+                <input name='search-bar' type='text' className='searchform__bar' placeholder='Фильм' required value={searchText}
                     onChange={handleInputChange} />
                 <button type='submit' className='searchform__button' />
             </div>
