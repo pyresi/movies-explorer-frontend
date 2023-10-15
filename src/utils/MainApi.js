@@ -4,7 +4,6 @@ import { MAIN_API_URL } from "./constants";
 class MainApi {
     constructor() {
         this.baseUrl = MAIN_API_URL;
-        this.baseUrl = 'http://localhost:3001';
     }
 
     _makeHeaders() {
