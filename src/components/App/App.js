@@ -286,6 +286,22 @@ function App() {
     setMoviesShortFilmToggle(value);
   }
 
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        setIsInfoTooltipOpened(false);
+      }
+    }
+
+    if (isInfoTooltipOpened) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      };
+    }
+  }, [isInfoTooltipOpened]);
+
+
   function handleEditProfileSubmit(name, email) {
     mainApi.patchuserInfo(name, email)
       .then((userData) => {
