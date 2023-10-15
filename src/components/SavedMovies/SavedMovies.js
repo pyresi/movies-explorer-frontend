@@ -1,21 +1,43 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import '../Movies/Movies.css';
-import '../Movies/Movies__more-btn.css';
-import Preloader from '../Preloader/Preloader.js';
-import Movies from "../Movies/Movies";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 
-function SavedMovies() {
+function SavedMovies({
+    savedMovies,
+    savedMoviesShortFilmToggle,
+    setSavedMoviesShortFilmToggle,
+    handleLikeClick,
+    moviesToShow,
+    savedMoviesMoreBtnClickedTimes,
+    setSavedMoviesMoreBtnClickedTimes,
+    maxMoviesToShow,
+    totalMoviesToShow
+}) {
+
+
+    let moviesComponent = <MoviesCardList
+        isSaved={true}
+        handleLikeClick={handleLikeClick}
+        moviesToShow={moviesToShow}
+        savedMovies={savedMovies}
+        maxMoviesToShow={maxMoviesToShow}
+        moreBtnClickTimes={savedMoviesMoreBtnClickedTimes}
+        setMoreBtnClickTimes={setSavedMoviesMoreBtnClickedTimes}
+        totalMoviesToShow={totalMoviesToShow}
+    />;
+
     return (
         <>
             <div className="movies">
-                <SearchForm></SearchForm>
-                <Preloader></Preloader>
-                {/* <MoviesCardList></MoviesCardList>
-            <button className='movies__more-btn'>
-                Ещё
-            </button> */}
+                <SearchForm
+                    setMoviesShortFilmToggle={setSavedMoviesShortFilmToggle}
+                    // queryMovies={queryMovies}
+                    moviesShortFilmToggle={savedMoviesShortFilmToggle}
+                // moviesQuery={moviesQuery}
+                // setMoviesQuery={setMoviesQuery}
+                />
+                {moviesComponent}
             </div>
             <Footer />
         </>

@@ -1,12 +1,9 @@
 import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Preloader from "../Preloader/Preloader";
 import SearchForm from "../SearchForm/SearchForm";
 import './Movies.css';
-import './Movies__more-btn.css';
 
 function Movies({
-    isEmpty,
     isLoading,
     moviesToShow,
     moviesShortFilmToggle,
@@ -17,18 +14,24 @@ function Movies({
     setMoviesQuery,
     setMoviesMoreBtnClickedTimes,
     moviesMoreBtnClickedTimes,
+    handleLikeClick,
+    savedMovies,
+    maxMoviesToShow,
+    totalMoviesToShow
 }) {
     let moviesComponent = <></>;
     if (wasSearched) {
-        if (isLoading === true) {
-            moviesComponent = <Preloader />;
-        }
-        else if (isEmpty === true) {
-            moviesComponent = <p>Пусто</p>;
-        }
-        else {
-            moviesComponent = <MoviesCardList moviesToShow={moviesToShow} />;
-        }
+        moviesComponent = <MoviesCardList
+            isLoading={isLoading}
+            handleLikeClick={handleLikeClick}
+            moviesToShow={moviesToShow}
+            isSaved={false}
+            savedMovies={savedMovies}
+            maxMoviesToShow={maxMoviesToShow}
+            moreBtnClickTimes={moviesMoreBtnClickedTimes}
+            setMoreBtnClickTimes={setMoviesMoreBtnClickedTimes}
+            totalMoviesToShow={totalMoviesToShow}
+        />;
     }
 
     return (

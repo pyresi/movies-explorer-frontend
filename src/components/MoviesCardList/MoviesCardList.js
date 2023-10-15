@@ -1,32 +1,56 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 import { useEffect } from 'react';
 
-function MoviesCardList({ moviesToShow }) {
-    useEffect(function () {
-        console.log('effect');
-        console.log(moviesToShow);
-    }, [moviesToShow])
+function MoviesCardList({
+    savedMovies,
+    isLoading,
+    isSaved = false,
+    moviesToShow,
+    handleLikeClick,
+    maxMoviesToShow,
+    setMoreBtnClickTimes,
+    moreBtnClickTimes,
+    totalMoviesToShow
+}) {
 
-    console.log(moviesToShow);
-    return (
-        <>
+    useEffect(() => {
+        console.log('cardlist', maxMoviesToShow, totalMoviesToShow, moviesToShow);
+    }, [moviesToShow, maxMoviesToShow, totalMoviesToShow])
+    let component = <></>;
+
+    function handleMoreBtnClick(e) {
+        setMoreBtnClickTimes(moreBtnClickTimes + 1);
+    }
+
+    if (isLoading) {
+        component = <Preloader />
+    }
+    else if (moviesToShow.length === 0) {
+        component = <p className='moviescardlist__empty-message'>Ничего не найдено</p>
+    }
+    else {
+        component = <section className='moviescardlist__box'>
             <section className='moviescardlist'>
-                {moviesToShow !== undefined ? moviesToShow.map((x, idx) => {
-                    return <MoviesCard key={idx} name={x.nameRU} duration={x.duration} thumbnailURL={' https://api.nomoreparties.co/' + x.image.url} trailerLink={x.trailerLink} />
-                }) : <></>}
-
-                {/* <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard>
-                <MoviesCard></MoviesCard> */}
+                {moviesToShow.map((x) => {
+                    return <MoviesCard
+                        key={x.id}
+                        movieData={x}
+                        handleLikeClick={handleLikeClick}
+                        isSavedCard={isSaved}
+                        savedMovies={savedMovies}
+                    />
+                })}
             </section>
-            <button className='movies__more-btn'>Ещё</button>
-        </>
+            {maxMoviesToShow >= totalMoviesToShow
+                ? <></>
+                : <button className='moviescardlist__more-btn' onClick={handleMoreBtnClick}>Ещё</button>}
+        </section>
+    }
+
+    return (
+        <>{component}</>
     )
 }
 

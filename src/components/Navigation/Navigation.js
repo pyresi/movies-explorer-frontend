@@ -21,12 +21,16 @@ function Navigation({ windowSize }) {
     const { isLoggedIn } = useContext(UserContext)
 
     useEffect(() => {
-        if (isLoggedIn && windowSize.innerWidth <= 768) {
-            setShowBurger(true);
-        }
-        else {
-            setShowBurger(false);
-        }
+
+        const timer = setTimeout(() => {
+            if (isLoggedIn && windowSize.innerWidth <= 768) {
+                setShowBurger(true);
+            }
+            else {
+                setShowBurger(false);
+            }
+        }, 10)
+        return () => clearTimeout(timer);
     }, [windowSize, isLoggedIn])
 
     const { setIsSideMenuActive } = useContext(AppContext);

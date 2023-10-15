@@ -1,6 +1,7 @@
 class MainApi {
     constructor() {
-        this.baseUrl = 'https://api.pyresi.movies.nomoredomainsicu.ru';
+        // this.baseUrl = 'https://api.pyresi.movies.nomoredomainsicu.ru';
+        this.baseUrl = 'http://localhost:3001';
     }
 
     _makeHeaders() {
@@ -71,6 +72,30 @@ class MainApi {
                 email: email,
                 name: name,
             }),
+            headers: this._makeHeaders()
+        });
+    }
+
+    getMovies() {
+        return this._request('/movies', {
+            method: 'GET',
+            headers: this._makeHeaders()
+        })
+    }
+
+    postMovie({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId }) {
+        console.log('api request: ', { country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId });
+        return this._request('/movies', {
+            method: 'POST',
+            body: JSON.stringify({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId }),
+            headers: this._makeHeaders()
+        });
+    }
+
+    deleteMovie({ movieId }) {
+        console.log('movieID', movieId);
+        return this._request(`/movies/${movieId}`, {
+            method: 'DELETE',
             headers: this._makeHeaders()
         });
     }
