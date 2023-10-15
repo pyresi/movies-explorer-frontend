@@ -26,7 +26,7 @@ function Register({ onRegisterClick, registerErrorMessage }) {
                     return 'Это поле должно быть заполненно';
                 }
                 else if (!validateName(value)) {
-                    return 'Поле должно содержать только латиницу, кириллицу, пробел или дефис.'
+                    return 'Поле должно быть от 3 до 30 символов и содержать только латиницу, кириллицу, пробел или дефис.'
                 }
                 else {
                     return '';
@@ -36,7 +36,7 @@ function Register({ onRegisterClick, registerErrorMessage }) {
                 if (value.length === 0) {
                     return 'Это поле должно быть заполненно';
                 } else if (!validateEmail(value)) {
-                    return 'Некорректрный email';
+                    return 'Некорректный email';
                 } else {
                     return '';
                 }
@@ -45,7 +45,7 @@ function Register({ onRegisterClick, registerErrorMessage }) {
                 if (value.length === 0) {
                     return 'Это поле должно быть заполненно';
                 } else if (!validatePassword(value)) {
-                    return 'Пароль должно состоять как минимум из 8-ми симоволов и содержать только прописные/строчные латинские символы и цифры';
+                    return 'Пароль должен состоять как минимум из 8-ми симоволов и содержать только прописные/строчные латинские символы и цифры';
                 } else {
                     return '';
                 }
@@ -88,7 +88,7 @@ function Register({ onRegisterClick, registerErrorMessage }) {
                 </div>
                 <div className="register__box">
                     <p className="register__box-title">Пароль</p>
-                    <input className="register__box-input" name='register-password' onChange={handleChange} required value={values['register-password']} />
+                    <input type='password' className="register__box-input" name='register-password' onChange={handleChange} required value={values['register-password']} />
                     <p className={'register__box-error' + (errors['register-password'] ? ' register__box-error_active' : '')}>{errors['register-password']}</p>
                 </div>
 

@@ -8,12 +8,13 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 function Login({ onLoginClick, loginErrorMessage }) {
 
     function validate(name, value) {
+        console.log(name);
         switch (name) {
             case 'login-email':
                 if (value.length === 0) {
                     return 'Это поле должно быть заполненно';
                 } else if (!validateEmail(value)) {
-                    return 'Некорректрный email';
+                    return 'Некорректный email';
                 } else {
                     return '';
                 }
@@ -53,8 +54,8 @@ function Login({ onLoginClick, loginErrorMessage }) {
                 </div>
                 <div className="register__box">
                     <p className="register__box-title">Пароль</p>
-                    <input className="register__box-input" name='login-password' required onChange={handleChange} value={values['login-password'] || ''} />
-                    <p className={'register__box-error' + (errors['login-password'] ? ' register__box-error_active' : '')}>{errors['login-email']}</p>
+                    <input type='password' className="register__box-input" name='login-password' required onChange={handleChange} value={values['login-password'] || ''} />
+                    <p className={'register__box-error' + (errors['login-password'] ? ' register__box-error_active' : '')}>{errors['login-password']}</p>
                 </div>
                 <div className="register__buttons-box">
                     <SubmitButton errorMsg={loginErrorMessage} buttonText={'Войти'} isValid={isValid} />

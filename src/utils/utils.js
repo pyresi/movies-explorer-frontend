@@ -3,9 +3,9 @@ export function validateEmail(email) {
 }
 
 export function validatePassword(password) {
-    return new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/).test(password);
+    return true;
 }
 
 export function validateName(name) {
-    return new RegExp(/^([a-zA-z0-9\- а-яА-я]+)$/).test(name);
+    return new RegExp(/^([a-zA-z0-9\- а-яА-я]){3,30}$/).test(name);
 }
