@@ -7,23 +7,31 @@ import './Navigation__register-block.css';
 import './Navigation__register-btn.css';
 import './Navigation__login-btn.css';
 import { Link, useLocation } from 'react-router-dom';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../contexts/CurrentAppContext';
 import Logo from '../Logo/Logo';
 import { UserContext } from '../../contexts/CurrentUserContext';
 import AccountButton from '../AccountButton/AccountButton';
 
-function getWindowSize() {
-    const { innerWidth, innerHeight } = window;
-    return { innerWidth, innerHeight };
-}
 
-function Navigation() {
+
+function Navigation({ windowSize }) {
     const [showBurger, setShowBurger] = useState(false);
     const location = useLocation();
     const { isLoggedIn } = useContext(UserContext)
 
-    const [windowSize, setWindowSize] = useState(getWindowSize());
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+            if (isLoggedIn && windowSize.innerWidth <= 768) {
+                setShowBurger(true);
+            }
+            else {
+                setShowBurger(false);
+            }
+        }, 10)
+        return () => clearTimeout(timer);
+    }, [windowSize, isLoggedIn])
 
     const { setIsSideMenuActive } = useContext(AppContext);
 
@@ -36,17 +44,7 @@ function Navigation() {
         isBlueBackground = true;
     }
 
-    useEffect(() => {
-        function handleWindowResize() {
-            setWindowSize(getWindowSize());
-        }
 
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
 
     // let showNav = false;
     // if (['/', '/profile', '/movies', '/saved-movies'].includes(location.pathname)) {
@@ -55,14 +53,7 @@ function Navigation() {
 
     // let showBurger = false;
     // console.log(isLoggedIn);
-    useEffect(() => {
-        if (isLoggedIn && windowSize.innerWidth <= 768) {
-            setShowBurger(true);
-        }
-        else {
-            setShowBurger(false);
-        }
-    }, [windowSize, isLoggedIn])
+
 
     let registerClass = 'navigation__regiser-btn';
     if (['/profile', '/movies', '/saved-movies'].includes(location.pathname)) {

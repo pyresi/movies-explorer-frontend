@@ -1,14 +1,14 @@
 .profile__box {
   display: flex;
   justify-content: space-between;
-  width: min(410px, 90%);
+  width: min(410px, 90vw);
   border-bottom: 1px solid #e8e8e8;
   margin-top: 16px;
   padding-bottom: 16px;
 }
 
 .profile__box:first-of-type {
-  border-bottom: none;
+  /* border-bottom: none; */
   margin-top: 0;
 }
 

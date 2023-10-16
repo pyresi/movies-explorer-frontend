@@ -1,16 +1,34 @@
 .moviescard {
   color: black;
-  padding-bottom: 14px;
-  max-width: 1280px;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
   background-color: white;
   box-shadow: 0px 16px 24px 0px #0000000d;
   border-radius: 14px;
+}
+
+.moviescard__description-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding: 0 12px;
+  gap: 8px;
+  /* width: calc(100% - 24px); */
+}
+
+@media screen and (max-width: 768px) {
+  .moviescard {
+    width: min(339px, calc(100% - 24px));
+  }
 }
 
 @media screen and (max-width: 320px) {
   .moviescard {
     margin: 0;
     padding: 0;
-    width: 300px;
+    width: min(300px, 100%);
   }
 }

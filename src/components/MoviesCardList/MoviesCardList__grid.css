@@ -3,6 +3,21 @@
   gap: 32px 20px;
   margin: auto;
   padding-top: 70px;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  justify-content: start;
+  grid-template-columns: repeat(270px, minmax(270px, 1fr));
   background-color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .moviescardlist__grid {
+    gap: 36px 30px;
+    grid-template-columns: repeat(339px, minmax(339px, 1fr));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .moviescardlist__grid {
+    width: 339px;
+    height: 257px;
+  }
 }

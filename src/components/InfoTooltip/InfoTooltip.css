@@ -1,0 +1,85 @@
+.infotooltip {
+  /* display: none; */
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+  /* animation: fade-out 0.5s linear; */
+}
+
+.infotooltip_opened {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.infotooltip__container {
+  margin: 0;
+  width: 430px;
+  position: fixed;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.infotooltip__button-close {
+  position: absolute;
+  background-color: transparent;
+  background-image: url(../../images/Close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  border: none;
+}
+
+.infotooltip__button-close:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.infotooltip__auth-icon {
+  padding: 0;
+  /* margin: 40px 145px; */
+  display: block;
+  margin: 60px auto 60px auto;
+  width: 120px;
+  /* position: relative; */
+}
+
+@media screen and (max-width: 768px) {
+  .infotooltip__container {
+    width: 282px;
+  }
+
+  .infotooltip__button-close {
+    right: 0;
+    top: -36px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../images/Close_small.svg);
+    /* width: 238px; */
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

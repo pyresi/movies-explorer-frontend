@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './Header_type_white.css';
 import './Header_type_disabled.css';
 
-function Header() {
+function Header({ windowSize }) {
     const location = useLocation();
 
     let headerClass = 'header_type_disabled';
@@ -18,7 +18,7 @@ function Header() {
     return (
         <header className={headerClass}>
             <div className='header__container'>
-                <Navigation />
+                <Navigation windowSize={windowSize} />
             </div>
         </header>
     );

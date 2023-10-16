@@ -1,17 +1,53 @@
+import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import './Movies.css';
-import './Movies__more-btn.css';
 
-function Movies() {
+function Movies({
+    isLoading,
+    moviesToShow,
+    moviesShortFilmToggle,
+    setMoviesShortFilmToggle,
+    queryMovies,
+    wasSearched,
+    moviesQuery,
+    setMoviesQuery,
+    setMoviesMoreBtnClickedTimes,
+    moviesMoreBtnClickedTimes,
+    handleLikeClick,
+    savedMovies,
+    maxMoviesToShow,
+    totalMoviesToShow,
+    defaultSearchText
+}) {
+    let moviesComponent = <></>;
+    if (wasSearched) {
+        moviesComponent = <MoviesCardList
+            isLoading={isLoading}
+            handleLikeClick={handleLikeClick}
+            moviesToShow={moviesToShow}
+            isSaved={false}
+            savedMovies={savedMovies}
+            maxMoviesToShow={maxMoviesToShow}
+            moreBtnClickTimes={moviesMoreBtnClickedTimes}
+            setMoreBtnClickTimes={setMoviesMoreBtnClickedTimes}
+            totalMoviesToShow={totalMoviesToShow}
+        />;
+    }
+
     return (
-        <div className="movies">
-            <SearchForm></SearchForm>
-            <MoviesCardList></MoviesCardList>
-            <button className='movies__more-btn'>
-                Ещё
-            </button>
-        </div>
+        <>
+            <div className="movies">
+                <SearchForm
+                    setMoviesShortFilmToggle={setMoviesShortFilmToggle}
+                    queryMovies={queryMovies}
+                    moviesShortFilmToggle={moviesShortFilmToggle}
+                    defaultSearchText={defaultSearchText}
+                />
+                {moviesComponent}
+            </div>
+            <Footer />
+        </>
     )
 }
 

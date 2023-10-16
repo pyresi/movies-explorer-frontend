@@ -3,4 +3,32 @@
   flex-direction: column;
   align-items: center;
   color: black;
+  /* width: 89%; */
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.profile__inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 220px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__inputs {
+    margin-bottom: 210px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__inputs {
+    margin-bottom: 379px;
+  }
 }
