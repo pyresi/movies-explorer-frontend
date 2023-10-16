@@ -2,6 +2,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import '../Movies/Movies.css';
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
+import { useEffect } from "react";
 
 function SavedMovies({
     savedMovies,
@@ -9,9 +10,6 @@ function SavedMovies({
     setSavedMoviesShortFilmToggle,
     handleLikeClick,
     moviesToShow,
-    savedMoviesMoreBtnClickedTimes,
-    setSavedMoviesMoreBtnClickedTimes,
-    maxMoviesToShow,
     totalMoviesToShow,
     queryMovies,
     isSavedMoviesLoading
@@ -23,11 +21,13 @@ function SavedMovies({
         handleLikeClick={handleLikeClick}
         moviesToShow={moviesToShow}
         savedMovies={savedMovies}
-        maxMoviesToShow={maxMoviesToShow}
-        moreBtnClickTimes={savedMoviesMoreBtnClickedTimes}
-        setMoreBtnClickTimes={setSavedMoviesMoreBtnClickedTimes}
         totalMoviesToShow={totalMoviesToShow}
     />;
+
+    useEffect(() => {
+        console.log('saved-movies!!!');
+        queryMovies('');
+    }, []);
 
     return (
         <>

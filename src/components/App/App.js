@@ -16,7 +16,7 @@ import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltop from '../InfoTooltip/InfoTooltip';
-import { MOVIE_API_URL_PREFIX } from '../../utils/constants';
+import { MOVIE_API_URL_PREFIX, SHORT_MOVIES_LENGTH } from '../../utils/constants';
 import BigPreloader from '../BigPreloader/BigPreloader';
 
 
@@ -51,9 +51,9 @@ function App() {
   // const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [savedMoviesToShow, setSavedMoviesToShow] = useState([]);
   const [savedMoviesShortFilmToggle, setSavedMoviesShortFilmToggle] = useState(false);
-  const [savedMoviesMoreBtnClickedTimes, setSavedMoviesMoreBtnClickedTimes] = useState(0);
-  const [maxSavedMoviesToShow, setMaxSavedMoviesToShow] = useState(16);
-  const [totalSavedMoviesToShow, setTotalSavedMoviesToShow] = useState(0);
+  // const [savedMoviesMoreBtnClickedTimes, setSavedMoviesMoreBtnClickedTimes] = useState(0);
+  // const [maxSavedMoviesToShow, setMaxSavedMoviesToShow] = useState(16);
+  // const [totalSavedMoviesToShow, setTotalSavedMoviesToShow] = useState(0);
   const [isSavedMoviesLoading, setIsSavedMoviesLoading] = useState(false);
   const [savedMoviesQuery, setSavedMoviesQuery] = useState('');
   // -----------------------------
@@ -117,11 +117,13 @@ function App() {
   }, [isSideMenuActive]);
 
   function handleMoviesQueryChange(query) {
+    setMoviesMoreBtnClickedTimes(0);
     setMoviesQuery(query);
     localStorage.setItem('moviesQuery', query);
   }
 
   function checkIfMovieNameHasSubstring(movie, substring) {
+    substring = substring.toLowerCase();
     return (movie.nameRU.toLowerCase().includes(substring)) || (movie.nameEN.toLowerCase().includes(substring))
   }
 
@@ -129,52 +131,56 @@ function App() {
     setWasSearched(true);
     setIsLoading(true);
     handleMoviesQueryChange(query)
-    // setMoviesQuery(query);
     query = query.toLowerCase();
 
-    moviesApi.call().then((res) => {
-      const filtered = res.filter((x) => {
-        return checkIfMovieNameHasSubstring(x, query);
-      }).map((x) => { return { ...x, thumbnail: 'https://api.nomoreparties.co' + x.image.url } });
-
-      localStorage.setItem('fetchedMovies', JSON.stringify(filtered));
-      setFetchedMovies(filtered);
-    }).catch(console.error);
+    if (fetchedMovies.length === 0) {
+      moviesApi.call().then((res) => {
+        const fetched = res.map((x) => { return { ...x, thumbnail: 'https://api.nomoreparties.co' + x.image.url, movieId: x.id } });
+        localStorage.setItem('fetchedMovies', JSON.stringify(fetched));
+        setFetchedMovies(fetched);
+      }).catch(console.error);
+    }
   }
 
   function querySavedMovies(query) {
-    setIsSavedMoviesLoading(true);
+    // setIsSavedMoviesLoading(true);
     setSavedMoviesQuery(query);
-    query = query.toLowerCase();
-
-    // setFilteredSavedMovies(filtered);
   }
 
   function filterShortMovies(movies, isAllAllowed) {
     return movies.filter((x) => {
-      return isAllAllowed ? true : (x.duration <= 40);
+      return isAllAllowed ? true : (x.duration <= SHORT_MOVIES_LENGTH);
     })
   }
 
   useEffect(() => {
-    const filteredMovies = filterShortMovies(fetchedMovies, !moviesShortFilmToggle);
+
+    const query = moviesQuery.toLowerCase();
+    const filteredMovies = filterShortMovies(fetchedMovies.filter((x) => {
+      return checkIfMovieNameHasSubstring(x, query);
+    }), !moviesShortFilmToggle);
+
     setTotalMoviesToShow(filteredMovies.length);
     setMoviesToShow(filteredMovies.slice(0, maxMoviesToShow));
     setIsLoading(false);
-  }, [fetchedMovies, maxMoviesToShow, moviesShortFilmToggle,]);
+  }, [fetchedMovies, maxMoviesToShow, moviesShortFilmToggle, moviesQuery]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (windowSize.innerWidth > 768) {
+      if (windowSize.innerWidth > 1190) {
         setNumberOfAdditionalCards(4);
         setBaseMaxMovieCards(16);
       }
-      else if (windowSize.innerWidth <= 768) {
+      else if (windowSize.innerWidth > 887) {
+        setNumberOfAdditionalCards(3);
+        setBaseMaxMovieCards(12);
+      }
+      else if (windowSize.innerWidth > 767) {
         setNumberOfAdditionalCards(2);
         setBaseMaxMovieCards(8);
       }
-
-      if (windowSize.innerWidth <= 320) {
+      else {
+        setNumberOfAdditionalCards(2);
         setBaseMaxMovieCards(5);
       }
     }, 10)
@@ -185,22 +191,19 @@ function App() {
     setMaxMoviesToShow(baseMaxMovieCards + moviesMoreBtnClickedTimes * numberOfAdditionalCards);
   }, [baseMaxMovieCards, numberOfAdditionalCards, moviesMoreBtnClickedTimes])
 
-  useEffect(() => {
-    setMaxSavedMoviesToShow(baseMaxMovieCards + savedMoviesMoreBtnClickedTimes * numberOfAdditionalCards);
-  }, [baseMaxMovieCards, numberOfAdditionalCards, savedMoviesMoreBtnClickedTimes])
-
 
   useEffect(() => {
+    setIsSavedMoviesLoading(true);
     const query = savedMoviesQuery.toLowerCase();
 
     const filteredMovies = filterShortMovies(savedMovies.filter((x) => {
       return checkIfMovieNameHasSubstring(x, query);
     }), !savedMoviesShortFilmToggle);
-    setTotalSavedMoviesToShow(filteredMovies.length);
-    setSavedMoviesToShow(filteredMovies.slice(0, maxSavedMoviesToShow));
+
+    setSavedMoviesToShow(filteredMovies);
     setIsSavedMoviesLoading(false);
 
-  }, [savedMovies, maxSavedMoviesToShow, savedMoviesShortFilmToggle, savedMoviesQuery]);
+  }, [savedMovies, savedMoviesShortFilmToggle, savedMoviesQuery]);
 
   function handleRegisterClick(name, email, password) {
     mainApi
@@ -228,7 +231,6 @@ function App() {
       setCurrentUser(userData.data);
 
       setSavedMovies(savedMovies.data);
-      // setFilteredSavedMovies(savedMovies.data);
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies.data));
     }).catch(console.error);
   }
@@ -256,20 +258,17 @@ function App() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      mainApi
-        .verifyUser()
-        .then(() => {
+    mainApi
+      .verifyUser()
+      .then(() => {
 
-          setIsLoggedIn(true);
-        })
-        .then(initialize)
-        .catch(console.error)
-        .finally(() => {
-          setIsPageLoaded(true);
-        });
-    }
-
+        setIsLoggedIn(true);
+      })
+      .then(initialize)
+      .catch(console.error)
+      .finally(() => {
+        setIsPageLoaded(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -323,7 +322,7 @@ function App() {
   }
 
   function handleLikeClick(movieInfo) {
-    const filtered = savedMovies.filter(x => movieInfo.id === x.movieId);
+    const filtered = savedMovies.filter(x => movieInfo.movieId === x.movieId);
     if (filtered.length > 0) {
       deleteMovie(filtered[0]);
     }
@@ -344,7 +343,7 @@ function App() {
       nameRU: movieInfo.nameRU,
       nameEN: movieInfo.nameEN,
       thumbnail: MOVIE_API_URL_PREFIX + movieInfo.image.url,
-      movieId: movieInfo.id
+      movieId: movieInfo.movieId
     }).then((res) => {
       console.log(res);
       setSavedMovies([...savedMovies, res.data]);
@@ -419,13 +418,9 @@ function App() {
                 element={SavedMovies}
                 savedMoviesShortFilmToggle={savedMoviesShortFilmToggle}
                 setSavedMoviesShortFilmToggle={setSavedMoviesShortFilmToggle}
-                savedMoviesMoreBtnClickedTimes={savedMoviesMoreBtnClickedTimes}
-                setSavedMoviesMoreBtnClickedTimes={setSavedMoviesMoreBtnClickedTimes}
                 handleLikeClick={deleteMovie}
                 moviesToShow={savedMoviesToShow}
                 savedMovies={savedMovies}
-                totalMoviesToShow={totalSavedMoviesToShow}
-                maxMoviesToShow={maxSavedMoviesToShow}
                 queryMovies={querySavedMovies}
                 isSavedMoviesLoading={isSavedMoviesLoading}
               />} />

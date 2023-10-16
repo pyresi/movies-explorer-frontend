@@ -11,10 +11,10 @@ function SearchForm({
     moviesShortFilmToggle,
     setMoviesShortFilmToggle,
     queryMovies,
-    defaultSearchText = ''
 }) {
 
-    const [searchText, setSearchText] = useState(defaultSearchText);
+    const [searchText, setSearchText] = useState('');
+    const [errorText, setErrorText] = useState('');
 
     function handleInputChange(e) {
         setSearchText(e.target.value);
@@ -22,7 +22,14 @@ function SearchForm({
 
     function handleSearch(e) {
         e.preventDefault();
-        queryMovies(searchText);
+        if (searchText === '') {
+            setErrorText('Необходимо ввести ключевое слово');
+        }
+        else {
+            queryMovies(searchText);
+            setErrorText('');
+        }
+
     }
 
     function handleShortToggle(e) {
@@ -32,9 +39,10 @@ function SearchForm({
     return (
         <form name='searchform' className='searchform' onSubmit={handleSearch} >
             <div className='searchform__searchbar-section'>
-                <input name='search-bar' type='text' className='searchform__bar' placeholder='Фильм' required value={searchText}
+                <input name='search-bar' type='text' className='searchform__bar' placeholder='Фильм' value={searchText}
                     onChange={handleInputChange} />
                 <button type='submit' className='searchform__button' />
+                <p className='searchform__error'>{errorText}</p>
             </div>
 
             <div className='searchform__short-movies-section'>

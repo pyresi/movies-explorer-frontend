@@ -36,13 +36,13 @@ function MoviesCard({
     }
 
     useEffect(() => {
-        if (savedMovies.map((x) => x.movieId).includes(movieData.id)) {
+        if (savedMovies.map((x) => x.movieId).includes(movieData.movieId)) {
             setIsLiked(true);
         }
         else {
             setIsLiked(false);
         }
-    }, [savedMovies, movieData.id]);
+    }, [savedMovies, movieData.movieId]);
 
     return (
         <div className='moviescard'>

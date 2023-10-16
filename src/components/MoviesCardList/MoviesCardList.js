@@ -12,7 +12,7 @@ function MoviesCardList({
     maxMoviesToShow,
     setMoreBtnClickTimes,
     moreBtnClickTimes,
-    totalMoviesToShow
+    totalMoviesToShow,
 }) {
 
     useEffect(() => {
@@ -35,7 +35,7 @@ function MoviesCardList({
             <section className='moviescardlist'>
                 {moviesToShow.map((x) => {
                     return <MoviesCard
-                        key={x.id}
+                        key={x.movieId}
                         movieData={x}
                         handleLikeClick={handleLikeClick}
                         isSavedCard={isSaved}
@@ -43,7 +43,7 @@ function MoviesCardList({
                     />
                 })}
             </section>
-            {maxMoviesToShow >= totalMoviesToShow
+            {(maxMoviesToShow >= totalMoviesToShow) || (isSaved)
                 ? <></>
                 : <button className='moviescardlist__more-btn' onClick={handleMoreBtnClick}>Ещё</button>}
         </section>
