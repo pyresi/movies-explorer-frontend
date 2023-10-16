@@ -17,11 +17,13 @@ import { mainApi } from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltop from '../InfoTooltip/InfoTooltip';
 import { MOVIE_API_URL_PREFIX } from '../../utils/constants';
+import BigPreloader from '../BigPreloader/BigPreloader';
 
 
 function App() {
 
   // general states
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [isSideMenuActive, setIsSideMenuActive] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
@@ -258,10 +260,14 @@ function App() {
       mainApi
         .verifyUser()
         .then(() => {
+
           setIsLoggedIn(true);
         })
         .then(initialize)
-        .catch(console.error);
+        .catch(console.error)
+        .finally(() => {
+          setIsPageLoaded(true);
+        });
     }
 
   }, []);
@@ -356,7 +362,7 @@ function App() {
     localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
   }, [savedMovies])
 
-  return (
+  return (!isPageLoaded ? <BigPreloader /> : (
     <div className="page">
       <AppContext.Provider value={{ isLoading, setIsLoading, isSideMenuActive, setIsSideMenuActive }}>
         <UserContext.Provider value={{ currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn }}>
@@ -434,7 +440,7 @@ function App() {
         </UserContext.Provider>
       </AppContext.Provider>
     </div>
-  );
+  ));
 }
 
 export default App;
